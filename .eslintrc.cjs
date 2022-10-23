@@ -9,10 +9,10 @@ module.exports = {
         ecmaVersion: 'latest'
     },
     rules: {
-        indent: [
-            'error',
-            4
-        ],
+        // indent: [
+        //     'error',
+        //     4
+        // ],
         'space-before-function-paren': [
             'warn',
             'always'
