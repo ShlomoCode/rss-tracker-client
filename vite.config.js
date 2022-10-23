@@ -5,10 +5,27 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+    server: {
+    // https: true
+        open: true, // opens browser window automatically
+        // proxy ajaxy requests to the beck-end API server in port 
+        proxy: {
+            '/api': {
+                target: 'http://localhost:',
+                changeOrigin: true,
+                secure: false,
+                logLevel: 'debug',
+                pathRewrite: {
+                    '^/api': ''
+
+                }
+            }
+        }
+    },
+    plugins: [vue()],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
     }
-  }
 })
