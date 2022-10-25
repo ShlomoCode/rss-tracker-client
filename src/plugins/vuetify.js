@@ -5,6 +5,14 @@ import 'vuetify/styles'
 // Vuetify
 import { createVuetify } from 'vuetify'
 
-export default createVuetify(
-  // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-)
+// Translations provided by Vuetify
+import { he, en } from 'vuetify/locale'
+
+
+export default createVuetify({
+  locale: {
+    locale: 'he',
+    fallback: 'en',
+    messages: { he, en }
+  }
+})
