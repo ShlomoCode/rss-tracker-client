@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
     const user = reactive({
@@ -7,7 +7,18 @@ export const useUserStore = defineStore('user', () => {
         email: ''
     })
     
-    const isLoggedIn = computed(() => !!user.email.value)
+    const userInStorage = localStorage.getItem('user')
+    if (userInStorage) {
+        const { name, email } = JSON.parse(userInStorage)
+        user.name = name
+        user.email = email
+    }
+
+    watch(() => user, (state) => {
+        localStorage.setItem('user', JSON.stringify(state))
+    }, { deep: true })
+    
+    const isLoggedIn = computed(() => !!user.email)
     
     const fakePromise = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -28,10 +39,10 @@ export const useUserStore = defineStore('user', () => {
     }
 
     return {
+        user,
         isLoggedIn,
         login,
         register,
         logout
     }
-}
-)
+})
