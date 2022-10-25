@@ -64,7 +64,7 @@ const login = async () => {
             password: password.value
         });
         snacksStore.add({
-            text: 'התחברת בהצלחה. ברוך שובך :)',
+            text: 'התחברת בהצלחה. ברוך הבא :)',
             color: 'success'
         });
         $router.push($props.nextRoute);
