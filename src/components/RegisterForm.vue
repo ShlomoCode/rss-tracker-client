@@ -109,7 +109,7 @@ const passwordInvalid = computed(() => {
 const passwordInvalidMsg = computed(() => {
     if (!passwordInvalid.value) return '';
     if (validator.isEmpty(password.value)) return 'שדה חובה';
-    if (zxcvbn(password.value).score < 1) return 'סיסמה חלשה מידי';
+    if (zxcvbn(password.value).score < 1) return 'הסיסמה חלשה מידי';
     return '';
 });
 

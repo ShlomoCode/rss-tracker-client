@@ -69,11 +69,24 @@ const login = async () => {
             email: email.value,
             password: password.value
         });
-        snacksStore.addSnack({
-            text: 'התחברת בהצלחה. ברוך הבא :)',
-            color: 'success'
-        });
-        $router.push($props.nextRoute);
+        if (userStore.isVerified) {
+            snacksStore.addSnack({
+                text: 'התחברת בהצלחה. ברוך הבא :)',
+                color: 'success'
+            });
+            $router.push($props.nextRoute);
+        } else {
+            snacksStore.addSnack({
+                text: 'התחברת בהצלחה, נשאר רק לאמת דוא"ל והכל מוכן',
+                color: 'info'
+            });
+            $router.push({
+                name: 'VerifyPage',
+                query: {
+                    next: $props.nextRoute
+                }
+            });
+        }
     } catch (error) {
         console.log(error);
     } finally {
@@ -101,7 +114,7 @@ const passwordInvalid = computed(() => {
 const passwordInvalidMsg = computed(() => {
     if (!passwordInvalid.value) return '';
     if (validator.isEmpty(password.value)) return 'שדה חובה';
-    if (zxcvbn(password.value).score < 1) return 'סיסמה חלשה מידי';
+    if (zxcvbn(password.value).score < 1) return 'הסיסמה חלשה מידי';
     return '';
 });
 </script>
