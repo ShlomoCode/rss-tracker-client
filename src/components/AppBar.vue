@@ -34,13 +34,13 @@ const logout = async () => {
   try {
     loading.value = true;
     await userStore.logout();
-    snacksStore.add({
+    snacksStore.addSnack({
       text: "התנתקת בהצלחה. נתראה! 👋",
       color: "success",
     });
     $router.push({ name: 'HomePage' })
   } catch (error) {
-    snacksStore.add({
+    snacksStore.addSnack({
       color: "error",
       text: error.message,
     });

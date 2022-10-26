@@ -5,7 +5,7 @@ export const useSnacksStore = defineStore('snacks', () => {
     let snacksId = 0;
     const snacks = reactive([]);
 
-    const add = (snackbar) => {
+    const addSnack = (snackbar) => {
         snacksId++
         snacks.push({
             id: snacksId,
@@ -22,6 +22,6 @@ export const useSnacksStore = defineStore('snacks', () => {
 
     return {
         snacks,
-        add
+        addSnack
     }
 })

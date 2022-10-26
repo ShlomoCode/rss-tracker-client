@@ -34,7 +34,7 @@ router.beforeEach(to => {
     const snacksStore = useSnacksStore()
     const userStore = useUserStore()
     if (!userStore.isLoggedIn && to.meta.requiresAuth) {
-      snacksStore.add({
+      snacksStore.addSnack({
         type: 'error',
         text: 'כדי לגשת לדף זה עליך להיות מחובר לחשבון, אנא התחבר',
         timeout: 2800,

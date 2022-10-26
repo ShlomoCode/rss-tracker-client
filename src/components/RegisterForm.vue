@@ -54,13 +54,13 @@ const register = async () => {
         await userStore.register({
             name, email, password
         })
-        snacksStore.add({
+        snacksStore.addSnack({
             text: 'נרשמת בהצלחה! זמן טוב להתחבר לחשבון...',
             color: 'success'
         })
         emit('toggle-form-show');
     } catch (err) {
-        snacksStore.add({
+        snacksStore.addSnack({
             text: err.message,
             color: 'error'
         })
