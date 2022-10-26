@@ -5,11 +5,12 @@
         </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="login()">
-                <v-text-field autofocus reverse required label="כתובת אימייל" prepend-icon="mdi-email"
-                    v-model="email" />
+                <v-text-field autofocus reverse required label="כתובת אימייל" prepend-icon="mdi-email" v-model="email"
+                    :error="emailInvalid" :error-messages="emailInvalidMsg" />
                 <v-text-field v-model="password" required :type="showPassword ? 'text' : 'password'" label="סיסמה"
                     prepend-icon="mdi-lock" :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append-inner="showPassword = !showPassword" />
+                    @click:append-inner="showPassword = !showPassword" :error="passwordInvalid"
+                    :error-messages="passwordInvalidMsg" />
                 <v-col cols="12" class="text-left">
                     <v-btn type="submit" color="success" :loading="loading">
                         <v-icon>mdi-login</v-icon>
@@ -30,10 +31,13 @@
 </template>
     
 <script setup>
-import { ref } from "vue";
+import validator from 'validator';
+import { zxcvbn } from '@zxcvbn-ts/core'
+import { ref, computed } from "vue";
 import { useUserStore } from '@/stores/user';
 import { useRouter } from 'vue-router';
 import { useSnacksStore } from '@/stores/snacks'
+
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
 const $router = useRouter()
@@ -57,13 +61,15 @@ const $props = defineProps({
 
 const loading = ref(false);
 const login = async () => {
+    validateForm.value = true;
+    if (emailInvalid.value || passwordInvalid.value) return;
     loading.value = true;
     try {
         await userStore.login({
             email: email.value,
             password: password.value
         });
-        snacksStore.add({
+        snacksStore.addSnack({
             text: 'התחברת בהצלחה. ברוך הבא :)',
             color: 'success'
         });
@@ -74,4 +80,28 @@ const login = async () => {
         loading.value = false;
     }
 }
+
+const validateForm = ref(false);
+
+const emailInvalid = computed(() => {
+    return validateForm.value && !validator.isEmail(email.value);
+});
+
+const emailInvalidMsg = computed(() => {
+    if (!emailInvalid.value) return '';
+    if (validator.isEmpty(email.value)) return 'שדה חובה';
+    if (!validator.isEmail(email.value)) return 'כתובת אימייל לא תקינה';
+    return '';
+});
+
+const passwordInvalid = computed(() => {
+    return validateForm.value && zxcvbn(password.value).score < 1
+});
+
+const passwordInvalidMsg = computed(() => {
+    if (!passwordInvalid.value) return '';
+    if (validator.isEmpty(password.value)) return 'שדה חובה';
+    if (zxcvbn(password.value).score < 1) return 'סיסמה חלשה מידי';
+    return '';
+});
 </script>

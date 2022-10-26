@@ -5,11 +5,14 @@
         </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="register()">
-                <v-text-field autofocus label="שם פרטי" prepend-icon="mdi-account" v-model="name" />
-                <v-text-field reverse label="כתובת אימייל" prepend-icon="mdi-email" v-model="email" />
+                <v-text-field autofocus label="שם פרטי" prepend-icon="mdi-account" v-model="name" :error="nameInvalid"
+                    :error-messages="nameInvalidMsg" />
+                <v-text-field reverse label="כתובת אימייל" prepend-icon="mdi-email" v-model="email"
+                    :error="emailInvalid" :error-messages="emailInvalidMsg" />
                 <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'" label="סיסמה"
                     prepend-icon="mdi-lock" :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append-inner="showPassword = !showPassword" />
+                    @click:append-inner="showPassword = !showPassword" :error="passwordInvalid"
+                    :error-messages="passwordInvalidMsg" />
                 <v-col cols="12" class="text-left">
                     <v-btn type="submit" color="success" :loading="loading">
                         <v-icon>mdi-account-plus</v-icon>
@@ -30,7 +33,9 @@
 </template>
     
 <script setup>
-import { ref } from "vue";
+import validator from 'validator';
+import { zxcvbn } from '@zxcvbn-ts/core'
+import { ref, computed } from "vue";
 import { useUserStore } from '@/stores/user';
 import { useSnacksStore } from "@/stores/snacks";
 
@@ -42,13 +47,16 @@ const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 
-const emit = defineEmits(['toggle-form-show', 'register']);
+const emit = defineEmits(['toggle-form-show']);
 const toggleFormShow = () => {
     emit('toggle-form-show');
 }
 
 const loading = ref(false);
 const register = async () => {
+    validateForm.value = true;
+    if (nameInvalid.value || emailInvalid.value || passwordInvalid.value) return;
+
     loading.value = true;
     try {
         await userStore.register({
@@ -69,4 +77,40 @@ const register = async () => {
         loading.value = false;
     }
 }
+
+const validateForm = ref(false);
+
+const nameInvalid = computed(() => {
+    return  validateForm.value && !validator.isLength(name.value, { min: 2, max: 15 });
+});
+
+const nameInvalidMsg = computed(() => {
+    if (!validateForm.value) return '';
+    if (!name.value.length) return 'שדה חובה';
+    if (!validator.isLength(name.value, { min: 2, max: 15 })) return 'שם פרטי חייב להיות בין 2 ל-15 תווים';
+    return '';
+});
+
+const emailInvalid = computed(() => {
+    return validateForm.value && !validator.isEmail(email.value);
+});
+
+const emailInvalidMsg = computed(() => {
+    if (!emailInvalid.value) return '';
+    if (validator.isEmpty(email.value)) return 'שדה חובה';
+    if (!validator.isEmail(email.value)) return 'כתובת אימייל לא תקינה';
+    return '';
+});
+
+const passwordInvalid = computed(() => {
+    return validateForm.value && zxcvbn(password.value).score < 1
+});
+
+const passwordInvalidMsg = computed(() => {
+    if (!passwordInvalid.value) return '';
+    if (validator.isEmpty(password.value)) return 'שדה חובה';
+    if (zxcvbn(password.value).score < 1) return 'סיסמה חלשה מידי';
+    return '';
+});
+
 </script>
