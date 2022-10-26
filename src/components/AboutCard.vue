@@ -2,32 +2,29 @@
     <v-container>
         <v-row>
             <v-col cols="12">
-                <h3>
-
-                    <v-card width="380" class="mx-auto mt-3 mb-3">
-                        <v-card-title>
-                            <h1 class="text-h4">אודות</h1>
-                            דף זה עוד לא נכתב 😕
-                            <template v-if="!isLoggedIn">
-                                <br>
-                                בינתיים אפשר:
-                            </template>
-                        </v-card-title>
+                <v-card width="380" class="mx-auto mt-3 mb-3">
+                    <v-card-title>
+                        <h2>אודות</h2>
+                        דף זה עוד לא נכתב 😕
                         <template v-if="!isLoggedIn">
-                            <v-card-actions>
-                                <v-btn color="info" :to="{ name: 'LoginPage' }">
-                                    <v-icon>mdi-login</v-icon>
-                                    להתחבר לחשבון
-                                </v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn color="info" :to="{ name: 'LoginPage', query: { register: 1 } }">
-                                    <v-icon>mdi-account-plus</v-icon>
-                                    ליצור חשבון
-                                </v-btn>
-                            </v-card-actions>
+                            <br>
+                            בינתיים אפשר:
                         </template>
-                    </v-card>
-                </h3>
+                    </v-card-title>
+                    <template v-if="!isLoggedIn">
+                        <v-card-actions>
+                            <v-btn color="info" :to="{ name: 'LoginPage' }">
+                                <v-icon>mdi-login</v-icon>
+                                להתחבר לחשבון
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn color="info" :to="{ name: 'LoginPage', query: { register: 1 } }">
+                                <v-icon>mdi-account-plus</v-icon>
+                                ליצור חשבון
+                            </v-btn>
+                        </v-card-actions>
+                    </template>
+                </v-card>
             </v-col>
         </v-row>
     </v-container>
