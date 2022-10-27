@@ -14,7 +14,7 @@ export default defineConfig({
     // proxy ajaxy requests to the beck-end API server in port 
     proxy: {
       '/api': {
-        target: 'http://localhost:',
+        target: 'http://localhost:4200',
         changeOrigin: true,
         secure: false,
         logLevel: 'debug',
