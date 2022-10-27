@@ -7,9 +7,9 @@ export const useUserStore = defineStore('user', () => {
         email: '',
         verified: false
     }
-    
-    const user = reactive(initialUserState)
-    
+
+    const user = reactive({ ...initialUserState })
+
     const userInStorage = localStorage.getItem('user')
     if (userInStorage) {
         const userFromStorage = JSON.parse(userInStorage)
@@ -19,10 +19,10 @@ export const useUserStore = defineStore('user', () => {
     watch(() => user, (state) => {
         localStorage.setItem('user', JSON.stringify(state))
     }, { deep: true })
-    
+
     const isLoggedIn = computed(() => !!user.email)
     const ivVerified = computed(() => user.verified)
-    
+
     const fakePromise = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
     async function login ({ email, password }) {

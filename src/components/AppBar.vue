@@ -4,7 +4,7 @@
     <v-toolbar-title outlined color="white" style="cursor:pointer" @click="$router.push({ name: 'HomePage' })">
       Rss Tracker
     </v-toolbar-title>
-    <v-btn v-if="!ivVerified" :to="{ name: 'VerifyPage' }">אימות דוא"ל</v-btn>
+    <v-btn v-if="isLoggedIn && !ivVerified" :to="{ name: 'VerifyPage' }">אימות דוא"ל</v-btn>
     <template v-if="!isLoggedIn">
       <v-btn :to="{ name: 'LoginPage' }">
         <v-icon left>mdi-login</v-icon>
