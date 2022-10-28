@@ -44,6 +44,10 @@ export const useUserStore = defineStore('user', () => {
         await fakePromise(1000) // fake api call
     }
 
+    async function sendPasswordResetEmail (email) {
+        await fakePromise(1000) // fake api call
+    }
+    
     async function logout () {
         await fakePromise(700) // fake api call
         Object.assign(user, initialUserState)
@@ -57,6 +61,7 @@ export const useUserStore = defineStore('user', () => {
         register,
         verifyEmail,
         sendVerifyEmail,
+        sendPasswordResetEmail,
         logout
     }
 })

@@ -12,7 +12,7 @@
                     @click:append-inner="showPassword = !showPassword" :error="passwordInvalid"
                     :error-messages="passwordInvalidMsg" />
                 <v-col cols="12" class="text-left">
-                    <v-btn type="submit" color="success" :loading="loading">
+                    <v-btn type="submit" color="success" :loading="loadingLogin">
                         <v-icon>mdi-login</v-icon>
                         התחברות
                     </v-btn>
@@ -25,6 +25,11 @@
             <v-btn color="info" @click="toggleFormShow()">
                 <v-icon>mdi-account-plus</v-icon>
                 הירשם
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn v-if="showResetPasswordBtn" color="warning" @click="resetPassword()" :loading="loadingResetPassword">
+                <v-icon>mdi-lock-question</v-icon>
+                שכחתי את הסיסמה
             </v-btn>
         </v-card-actions>
     </v-card>
@@ -59,11 +64,12 @@ const $props = defineProps({
     }
 })
 
-const loading = ref(false);
+const showResetPasswordBtn = ref(false);
+const loadingLogin = ref(false);
 const login = async () => {
     validateForm.value = true;
     if (emailInvalid.value || passwordInvalid.value) return;
-    loading.value = true;
+    loadingLogin.value = true;
     try {
         await userStore.login({
             email: email.value,
@@ -88,9 +94,13 @@ const login = async () => {
             });
         }
     } catch (error) {
-        console.log(error);
+        showResetPasswordBtn.value = true;
+        snacksStore.addSnack({
+            text: error.message,
+            color: 'error'
+        });
     } finally {
-        loading.value = false;
+        loadingLogin.value = false;
     }
 }
 
@@ -117,4 +127,24 @@ const passwordInvalidMsg = computed(() => {
     if (zxcvbn(password.value).score < 1) return 'הסיסמה חלשה מידי';
     return '';
 });
+
+const loadingResetPassword = ref(false);
+const resetPassword = async () => {
+    if (emailInvalid.value) return;
+    loadingResetPassword.value = true;
+    try {
+        await userStore.sendPasswordResetEmail(email.value);
+        snacksStore.addSnack({
+            text: 'אוקיי, שלחנו לך למייל לינק לאיפוס הסיסמה',
+            color: 'success'
+        });
+    } catch (error) {
+        snacksStore.addSnack({
+            text: error.message,
+            color: 'error'
+        });
+    } finally {
+        loadingResetPassword.value = false;
+    }
+}
 </script>
