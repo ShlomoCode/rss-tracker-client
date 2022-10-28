@@ -40,6 +40,10 @@ export const useUserStore = defineStore('user', () => {
         user.verified = true
     }
 
+    async function sendVerifyEmail (code) {
+        await fakePromise(1000) // fake api call
+    }
+
     async function logout () {
         await fakePromise(700) // fake api call
         Object.assign(user, initialUserState)
@@ -52,6 +56,7 @@ export const useUserStore = defineStore('user', () => {
         login,
         register,
         verifyEmail,
+        sendVerifyEmail,
         logout
     }
 })

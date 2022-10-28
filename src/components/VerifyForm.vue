@@ -22,10 +22,11 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-            עוד אין לך חשבון?
-            <v-btn color="info" @click="toggleFormShow()">
-                <v-icon>mdi-account-plus</v-icon>
-                הירשם
+            לא קיבלת את הקוד?
+            <v-btn color="info">
+                <v-icon>mdi-email</v-icon>
+                שלח לי קוד חדש
+                <sendVerifyCodeDialog />
             </v-btn>
         </v-card-actions>
     </v-card>
@@ -37,6 +38,7 @@ import validator from 'validator'
 import { useUserStore } from '@/stores/user';
 import { useSnacksStore } from '@/stores/snacks'
 import { useRouter } from 'vue-router';
+import sendVerifyCodeDialog from './sendVerifyCodeDialog.vue'
 
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
