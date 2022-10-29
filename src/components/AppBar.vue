@@ -12,46 +12,20 @@
       </v-btn>
     </template>
     <template v-else>
-      <v-btn @click.prevent="logout()" :loading="loading">
-        <v-icon left>mdi-logout</v-icon>
-        יציאה
-      </v-btn>
+      <LogOutBtn />
     </template>
     <template v-slot:append></template>
   </v-app-bar>
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "@/stores/user.js";
-import { useSnacksStore } from '@/stores/snacks.js';
 import { useRouter } from 'vue-router';
+import LogOutBtn from '@/components/LogOutBtn.vue';
 
 const $router = useRouter()
-const snacksStore = useSnacksStore();
 const userStore = useUserStore();
 
 const { isLoggedIn, ivVerified } = storeToRefs(userStore);
-const loading = ref(false);
-
-const logout = async () => {
-  try {
-    loading.value = true;
-    await userStore.logout();
-    snacksStore.addSnack({
-      text: "התנתקת בהצלחה. נתראה! 👋",
-      color: "success",
-    });
-    $router.push({ name: 'HomePage' })
-  } catch (error) {
-    snacksStore.addSnack({
-      color: "error",
-      text: error.message,
-    });
-  } finally {
-    loading.value = false;
-    userStore.clearUser();
-  }
-};
 </script>
