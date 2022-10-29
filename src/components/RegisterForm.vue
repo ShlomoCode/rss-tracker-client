@@ -60,7 +60,9 @@ const register = async () => {
     loading.value = true;
     try {
         await userStore.register({
-            name, email, password
+            name: name.value,
+            email: email.value,
+            password: password.value
         })
         snacksStore.addSnack({
             text: 'נרשמת בהצלחה! זמן טוב להתחבר לחשבון...',

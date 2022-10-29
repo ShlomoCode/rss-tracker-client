@@ -51,6 +51,7 @@ const logout = async () => {
     });
   } finally {
     loading.value = false;
+    userStore.clearUser();
   }
 };
 </script>

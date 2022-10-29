@@ -60,11 +60,11 @@ const loading = ref(false);
 
 const validateCode = ref(false);
 const codeInvalid = computed(() => {
-    return validateCode.value && (!validator.isLength(code.value, { min: 6, max: 6 }) || !validator.isNumeric(code.value));
+    return validateCode.value && (!validator.isLength(code.value, { min: 5, max: 5 }) || !validator.isNumeric(code.value));
 });
 const codeInvalidMsg = computed(() => {
     if (!validateCode.value) return '';
-    if (!validator.isLength(code.value, { min: 6, max: 6 })) return 'הקוד חייב להיות באורך 6 תווים';
+    if (!validator.isLength(code.value, { min: 5, max: 5 })) return 'הקוד חייב להיות באורך 5 תווים';
     if (!validator.isNumeric(code.value)) return 'הקוד חייב להכיל מספרים בלבד';
     return '';
 });
