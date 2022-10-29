@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, reactive, watch } from 'vue'
+import axios from '@/services/axios'
 
 export const useUserStore = defineStore('user', () => {
     const initialUserState = {
@@ -23,33 +24,38 @@ export const useUserStore = defineStore('user', () => {
     const isLoggedIn = computed(() => !!user.email)
     const ivVerified = computed(() => user.verified)
 
-    const fakePromise = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-    async function login ({ email, password }) {
-        await fakePromise(1000) // fake api call
-        user.email = email || 'abc@gmail.com'
-        user.name = 'משה'
+    function login ({ email, password }) {
+        return axios.post('users/login', { email, password })
+            .then(({ data }) => {
+                Object.assign(user, data.user)
+            })
     }
 
-    async function register ({ name, email, password }) {
-        await fakePromise(1000) // fake api call
+    function register ({ name, email, password }) {
+        return axios.post('users/signup', { name, email, password })
     }
 
-    async function verifyEmail (code) {
-        await fakePromise(1000) // fake api call
-        user.verified = true
+    function verifyEmail (code) {
+        return axios.post('users/verify', { code })
+            .then(() => {
+                user.verified = true
+            })
     }
 
-    async function sendVerifyEmail (code) {
-        await fakePromise(1000) // fake api call
+    function sendVerifyEmail () {
+        return axios.post('users/resendVerificationEmail')
     }
 
-    async function sendPasswordResetEmail (email) {
-        await fakePromise(1000) // fake api call
+    function sendPasswordResetEmail (email) {
+        return axios.post('users/reset-password', { email })
     }
-    
-    async function logout () {
-        await fakePromise(700) // fake api call
+
+    function logout () {
+        return axios.post('users/logout')
+    }
+
+    async function clearUser () {
         Object.assign(user, initialUserState)
     }
 
@@ -62,6 +68,7 @@ export const useUserStore = defineStore('user', () => {
         verifyEmail,
         sendVerifyEmail,
         sendPasswordResetEmail,
-        logout
+        logout,
+        clearUser
     }
 })
