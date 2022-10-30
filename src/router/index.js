@@ -74,7 +74,7 @@ router.beforeEach(to => {
       }
     }
   }
-  if (to.meta.requiresVerification && !userStore.ivVerified) {
+  if (to.meta.requiresVerification && !userStore.isVerified) {
     snacksStore.addSnack({
       type: 'error',
       text: 'כדי לגשת לדף זה עליך לאמת את הדוא"ל שלך, אנא אמת את הדוא"ל',
@@ -99,7 +99,7 @@ router.beforeEach(to => {
       }
     }
   }
-  if (to.name === 'VerifyPage' && userStore.ivVerified) {
+  if (to.name === 'VerifyPage' && userStore.isVerified) {
     if (to.query.next) {
       return {
         path: to.query.next

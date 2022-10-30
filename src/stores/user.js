@@ -22,8 +22,7 @@ export const useUserStore = defineStore('user', () => {
     }, { deep: true })
 
     const isLoggedIn = computed(() => !!user.email)
-    const ivVerified = computed(() => user.verified)
-
+    const isVerified = computed(() => user.verified)
 
     function login ({ email, password }) {
         return axios.post('users/login', { email, password })
@@ -59,7 +58,7 @@ export const useUserStore = defineStore('user', () => {
     return {
         user,
         isLoggedIn,
-        ivVerified,
+        isVerified,
         login,
         register,
         verifyEmail,

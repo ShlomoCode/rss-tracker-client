@@ -1,10 +1,13 @@
 <template>
   <v-app-bar color="primary" density="compact">
     <template v-slot:prepend></template>
-    <v-toolbar-title outlined color="white" style="cursor:pointer" @click="$router.push({ name: 'HomePage' })">
-      Rss Tracker
-    </v-toolbar-title>
-    <v-btn v-if="isLoggedIn && !ivVerified" :to="{ name: 'VerifyPage' }">אימות דוא"ל</v-btn>
+    <v-toolbar-title outlined @click="$router.push({ name: 'HomePage' })">
+      <router-link :to="{ name: 'HomePage' }" style="color: white; text-decoration: none">
+        Rss Tracker
+      </router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+    <v-btn v-if="isLoggedIn && !isVerified" :to="{ name: 'VerifyPage' }">אימות דוא"ל</v-btn>
     <template v-if="!isLoggedIn">
       <v-btn :to="{ name: 'LoginPage' }">
         <v-icon left>mdi-login</v-icon>
@@ -27,5 +30,5 @@ import LogOutBtn from '@/components/LogOutBtn.vue';
 const $router = useRouter()
 const userStore = useUserStore();
 
-const { isLoggedIn, ivVerified } = storeToRefs(userStore);
+const { isLoggedIn, isVerified } = storeToRefs(userStore);
 </script>

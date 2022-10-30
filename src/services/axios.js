@@ -20,9 +20,7 @@ axiosInstance.interceptors.response.use(
                     router.push({ name: 'VerifyPage' });
             }
         }
-        if (error.response && error.response.data.message) {
-            return Promise.reject(new Error(error.response.data.message));
-        }
+        if (error.response && error.response.data.message) error.message = error.response.data.message;
         return Promise.reject(error);
     }
 );

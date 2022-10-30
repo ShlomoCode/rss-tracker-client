@@ -77,15 +77,22 @@ const verify = async () => {
     try {
         await userStore.verifyEmail(code.value);
         snacksStore.addSnack({
-            text: 'זהו! גמרנו עם הבירוקרטיה 🥳',
+            text: 'החשבון אומת בהצלחה!',
             color: 'success'
         })
         $router.push($props.nextRoute);
     } catch (error) {
-        snacksStore.addSnack({
-            text: error.message,
-            color: 'error'
-        })
+        if (error.response && error.response.status === 409) {
+            snacksStore.addSnack({
+                text: 'החשבון שלך כבר מאומת',
+                color: 'info'
+            })
+        } else {
+            snacksStore.addSnack({
+                text: error.message,
+                color: 'error'
+            })
+        }
     } finally {
         loading.value = false;
     }

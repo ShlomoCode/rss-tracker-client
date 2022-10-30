@@ -86,7 +86,11 @@ const login = async () => {
                 text: 'התחברת בהצלחה, נשאר רק לאמת דוא"ל והכל מוכן',
                 color: 'info'
             });
-            $router.push($props.nextRoute);
+            if ($props.nextRoute === '/') {
+                $router.push({ name: 'VerifyPage' });
+            } else {
+                $router.push('/verify?' + $props.nextRoute);
+            }
         }
     } catch (error) {
         showResetPasswordBtn.value = true;
