@@ -50,8 +50,12 @@ export const useUserStore = defineStore('user', () => {
         return axios.post('users/reset-password', { email })
     }
 
-    function logout () {
+    function clearUser () {
         Object.assign(user, initialUserState)
+    }
+
+    function logout () {
+        clearUser()
         return axios.post('users/logout')
     }
 
@@ -64,6 +68,7 @@ export const useUserStore = defineStore('user', () => {
         verifyEmail,
         sendVerifyEmail,
         sendPasswordResetEmail,
-        logout
+        logout,
+        clearUser
     }
 })

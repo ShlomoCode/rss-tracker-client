@@ -16,7 +16,7 @@ axiosInstance.interceptors.response.use(
                     userStore.clearUser();
                     router.push({ name: 'LoginPage' });
                     break;
-                case 'verify-email':
+                case 'verify':
                     router.push({ name: 'VerifyPage' });
             }
         }
