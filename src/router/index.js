@@ -3,6 +3,7 @@ import HomeView from '@/views/HomePage.vue'
 import LoginView from '@/views/LoginPage.vue'
 import NotFoundView from '@/views/NotFound.vue'
 import VerifyView from '@/views/VerifyPage.vue'
+import SubscriptionsView from '@/views/SubscriptionsPage.vue'
 import { useUserStore } from '@/stores/user'
 import { useSnacksStore } from '@/stores/snacks'
 
@@ -43,6 +44,15 @@ const router = createRouter({
         code: route.query.code,
         nextRoute: route.query.next
       }),
+    },
+    {
+      path: '/subscriptions',
+      name: 'SubscriptionsPage',
+      component: SubscriptionsView,
+      meta: {
+        requiresLogin: true,
+        requiresVerification: true
+      }
     },
     {
       path: '/:pathMatch(.*)*',

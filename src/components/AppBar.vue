@@ -5,9 +5,10 @@
       <router-link :to="{ name: 'HomePage' }" style="color: white; text-decoration: none">
         Rss Tracker
       </router-link>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
     <v-btn v-if="isLoggedIn && !isVerified" :to="{ name: 'VerifyPage' }">אימות דוא"ל</v-btn>
+    <v-btn v-if="isLoggedIn && isVerified" :to="{ name: 'SubscriptionsPage' }">ניהול המנויים</v-btn>
     <template v-if="!isLoggedIn">
       <v-btn :to="{ name: 'LoginPage' }">
         <v-icon left>mdi-login</v-icon>
