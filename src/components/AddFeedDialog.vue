@@ -40,7 +40,7 @@ const newFeedUrl = ref('')
 const addFeed = async () => {
     loadingAddFeed.value = true
     try {
-        if (!/feed$/.test(newFeedUrl.value)) {
+        if (!/feed|rss|xml$/.test(newFeedUrl.value)) {
             newFeedUrl.value += '/feed'
         }
         await feedsStore.createFeed(newFeedUrl.value)

@@ -47,7 +47,8 @@ const shortFeedTitle = computed(() => {
 })
 
 const openFeedSource = () => {
-    window.open(feed.value.url.replace(/feed$/, ''), '_blank')
+    window.open(feed.value.url.replace(/feed|xml|rss$/, ''), '_blank')
+}
 }
 
 const subscribe = async () => {

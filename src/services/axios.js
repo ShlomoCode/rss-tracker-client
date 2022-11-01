@@ -9,15 +9,21 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
     response => response,
     error => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
             const userStore = useUserStore();
             switch (error.response.headers['action-required']) {
                 case 'login':
                     userStore.clearUser();
-                    router.push({ name: 'LoginPage' });
+                    router.push({
+                        name: 'LoginPage',
+                        query: { next: router.currentRoute.value.fullPath }
+                    });
                     break;
                 case 'verify':
-                    router.push({ name: 'VerifyPage' });
+                    router.push({
+                        name: 'VerifyPage',
+                        query: { next: router.currentRoute.value.fullPath }
+                    });
             }
         }
         if (error.response && error.response.data.message) error.message = error.response.data.message;
