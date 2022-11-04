@@ -1,7 +1,6 @@
 <template>
     <div>
-        <v-card class="mx-auto mt-2" elevation="1" max-width="800"
-            :to="{ name: 'ArticlePage', params: { articleId: article.id } }">
+        <v-card class="mx-auto mt-2" elevation="1" :to="{ name: 'ArticlePage', params: { articleId: article.id } }">
             <template v-if="article.image">
                 <v-row>
                     <v-col cols="12" sm="4">
@@ -31,7 +30,8 @@
                     <template v-for="tagName in article.tags.slice(0, 7)" :key="tagName">
                         <v-expand-transition mode="out-in">
                             <v-chip :size="sm ? 'small' : 'small'" class="ma-1" color="blue-darken-1" text-color="white"
-                                :to="{ name: 'TagPage', params: { tagName } }">
+                                :to="{ name: 'TagPage', params: { tagName } }"
+                                @click.prevent="$router.push({ name: 'TagPage', params: { tagName } })">
                                 <v-icon class="rotate">
                                     mdi-label-outline
                                 </v-icon>

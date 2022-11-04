@@ -6,7 +6,15 @@
                 נמצאו {{ articles.length }} כתבות תחת הפיד "{{ feed.title }}"
             </h2>
             <v-divider></v-divider>
-            <ArticleBanner v-for="article in articles" :key="article.id" :article="article" />
+            <template v-for="article in articles" :key="article.id">
+                <v-row>
+                    <v-spacer></v-spacer>
+                    <v-col cols="12" md="6">
+                        <ArticleBanner :article="article" />
+                    </v-col>
+                    <v-spacer></v-spacer>
+                </v-row>
+            </template>
         </template>
         <template v-else>
             <NoMatchArticles :error="errorMsg" />
