@@ -16,16 +16,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'HomePage',
-      component: HomeView,
-      meta: {
-        requiresLogin: false,
-        requiresVerification: false,
-        viewName: 'דף הבית',
-      }
-    },
-    {
       path: '/login',
       name: 'LoginPage',
       component: LoginView,
@@ -80,6 +70,16 @@ const router = createRouter({
     {
       path: '',
       children: [
+        {
+          path: '',
+          name: 'HomePage',
+          component: HomeView,
+          meta: {
+            requiresLogin: false,
+            requiresVerification: false,
+            viewName: 'דף הבית',
+          }
+        },
         {
           path: 'articles/:articleId',
           name: 'ArticlePage',
