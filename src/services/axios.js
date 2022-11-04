@@ -20,6 +20,7 @@ axiosInstance.interceptors.response.use(
                     });
                     break;
                 case 'verify':
+                    userStore.user.verified = false;
                     router.push({
                         name: 'VerifyPage',
                         query: { next: router.currentRoute.value.fullPath }
