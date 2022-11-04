@@ -13,7 +13,9 @@
                     :error-messages="passwordInvalidMsg" />
                 <v-col cols="12" class="text-left">
                     <v-btn type="submit" color="success" :loading="loadingLogin">
-                        <v-icon>mdi-login</v-icon>
+                        <v-icon>
+                            mdi-login
+                        </v-icon>
                         התחברות
                     </v-btn>
                 </v-col>
@@ -23,12 +25,16 @@
         <v-card-actions>
             עוד אין לך חשבון?
             <v-btn color="info" @click="toggleFormShow()">
-                <v-icon>mdi-account-plus</v-icon>
+                <v-icon>
+                    mdi-account-plus
+                </v-icon>
                 הירשם
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn v-if="showResetPasswordBtn" color="warning" @click="resetPassword()" :loading="loadingResetPassword">
-                <v-icon>mdi-lock-question</v-icon>
+            <v-btn v-if="showForgotPasswordBtn" color="warning" @click="forgotPassword()" :loading="loadingForgotPassword">
+                <v-icon>
+                    mdi-lock-question
+                </v-icon>
                 שכחתי את הסיסמה
             </v-btn>
         </v-card-actions>
@@ -64,7 +70,7 @@ const $props = defineProps({
     }
 })
 
-const showResetPasswordBtn = ref(false);
+const showForgotPasswordBtn = ref(false);
 const loadingLogin = ref(false);
 const login = async () => {
     validateForm.value = true;
@@ -93,7 +99,7 @@ const login = async () => {
             }
         }
     } catch (error) {
-        showResetPasswordBtn.value = true;
+        showForgotPasswordBtn.value = true;
         snacksStore.addSnack({
             text: error.message,
             color: 'error'
@@ -127,15 +133,21 @@ const passwordInvalidMsg = computed(() => {
     return '';
 });
 
-const loadingResetPassword = ref(false);
-const resetPassword = async () => {
+const loadingForgotPassword = ref(false);
+const forgotPassword = async () => {
     if (emailInvalid.value) return;
-    loadingResetPassword.value = true;
+    loadingForgotPassword.value = true;
     try {
-        await userStore.sendPasswordResetEmail(email.value);
+        await userStore.sendPasswordForgotEmail(email.value);
         snacksStore.addSnack({
-            text: 'אוקיי, שלחנו לך למייל לינק לאיפוס הסיסמה',
+            text: 'אוקיי, שלחנו לך למייל קוד אימות לאיפוס הסיסמה',
             color: 'success'
+        });
+        $router.push({
+            name: 'ForgotPasswordPage',
+            query: {
+                email: email.value
+            }
         });
     } catch (error) {
         snacksStore.addSnack({
@@ -143,7 +155,7 @@ const resetPassword = async () => {
             color: 'error'
         });
     } finally {
-        loadingResetPassword.value = false;
+        loadingForgotPassword.value = false;
     }
 }
 </script>

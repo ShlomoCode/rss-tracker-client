@@ -4,10 +4,12 @@
             <v-card-text class="text-center">
                 <template v-if="loading">
                     <h2>
-                        <v-icon>mdi-email-fast</v-icon>
+                        <v-icon>
+                            mdi-email-fast
+                        </v-icon>
                         עובדים על זה...
                     </h2>
-                    <v-progress-linear color="green" indeterminate></v-progress-linear>
+                    <v-progress-linear color="green" indeterminate />
                 </template>
                 <template v-else>
 

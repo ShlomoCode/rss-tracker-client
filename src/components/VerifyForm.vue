@@ -24,7 +24,9 @@
         <v-card-actions>
             לא קיבלת את הקוד?
             <v-btn color="info">
-                <v-icon>mdi-email</v-icon>
+                <v-icon>
+                    mdi-email
+                </v-icon>
                 שלח לי קוד חדש
                 <sendVerifyCodeDialog />
             </v-btn>
@@ -38,7 +40,7 @@ import validator from 'validator'
 import { useUserStore } from '@/stores/user';
 import { useSnacksStore } from '@/stores/snacks'
 import { useRouter } from 'vue-router';
-import sendVerifyCodeDialog from './sendVerifyCodeDialog.vue'
+import sendVerifyCodeDialog from './SendVerifyCodeDialog.vue'
 
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();

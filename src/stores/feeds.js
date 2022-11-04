@@ -9,7 +9,7 @@ export const useFeedsStore = defineStore('feeds', () => {
         return axios.post('feeds', { url: feedUrl }).then(({ data }) => {
             const { feed } = data;
             feeds.value.push({
-                id: feed._id,
+                id: feed.id,
                 subscribersCount: feed.subscribers,
                 title: feed.title,
                 url: feed.url,
@@ -39,7 +39,7 @@ export const useFeedsStore = defineStore('feeds', () => {
     function fetchFeeds () {
         return axios.get('feeds').then(({ data }) => {
             feeds.value = data.feeds.map(feed => ({
-                id: feed._id,
+                id: feed.id,
                 subscribersCount: feed.subscribers,
                 title: feed.title,
                 url: feed.url,

@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import AboutCard from '@/components/AboutCard.vue';
+import AboutCard from '@/components/TheAboutCard.vue';
 </script>

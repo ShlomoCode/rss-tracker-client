@@ -1,18 +1,15 @@
 <template>
     <div>
-        <div class="text-h5 ma-1">
-            ניהול המנויים
-        </div>
         <v-row>
             <v-spacer></v-spacer>
             <v-col cols="12" sm="4" md="auto" class="ma-1">
                 <v-switch v-model="showOnlySubs" color="green" label="הצג רק מנויים פעילים" />
             </v-col>
-            <v-col cols="12" sm="3" md="2">
-                <v-text-field v-model.trim="search" variant="underlined" label="חיפוש" prepend-inner-icon="mdi-magnify"
-                    append-inner-icon="mdi-close" @click:append-inner="search = ''" />
+            <v-col cols="12" sm="3" md="2" class="mt-0">
+                <v-text-field v-model.trim="search" class="ml-1" variant="underlined" label="חיפוש"
+                    prepend-inner-icon="mdi-magnify" append-inner-icon="mdi-close" @click:append-inner="search = ''" />
             </v-col>
-            <v-btn color="secondary" class="ma-5 ml-8">
+            <v-btn color="secondary" class="mt-6 ml-5">
                 <AddFeedDialog />
                 <v-icon left>
                     mdi-plus-circle

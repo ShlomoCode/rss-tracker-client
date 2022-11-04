@@ -14,12 +14,16 @@
                     <template v-if="!isLoggedIn">
                         <v-card-actions>
                             <v-btn color="info" :to="{ name: 'LoginPage' }">
-                                <v-icon>mdi-login</v-icon>
+                                <v-icon>
+                                    mdi-login
+                                </v-icon>
                                 להתחבר לחשבון
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn color="info" :to="{ name: 'LoginPage', query: { register: 1 } }">
-                                <v-icon>mdi-account-plus</v-icon>
+                                <v-icon>
+                                    mdi-account-plus
+                                </v-icon>
                                 ליצור חשבון
                             </v-btn>
                         </v-card-actions>

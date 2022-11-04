@@ -19,8 +19,8 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-const { data } = await axios.get('/api/general/statistics') // TODO: move to api client
+import axios from '@/services/axios'
+const { data } = await axios.get('general/statistics')
 const statistics = [
     {
         icon: 'mdi-account-group',

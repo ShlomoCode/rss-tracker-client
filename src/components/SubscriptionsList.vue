@@ -3,7 +3,7 @@
         <v-row>
             <template v-if="feeds.length">
                 <v-col v-for="feed in feeds" :key="feed.id" cols="12" sm="6" md="4" lg="3">
-                    <feed-card :feed="feed" />
+                    <FeedCard :feed="feed" />
                 </v-col>
             </template>
             <template v-else>

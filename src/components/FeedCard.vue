@@ -1,10 +1,11 @@
 <template>
-    <v-card class="ma-1 ml-2" :style="feed.subscribed ? 'border-bottom: 5px solid #69a8e673' : 'border-bottom: 5px solid #8080807a'">
+    <v-card class="ma-1 ml-2" :style="`border-bottom: 5px solid ${feed.subscribed ? '#69a8e673' : '#8080807a'}`">
         <v-card-title>
             <h3>
                 {{ shortFeedTitle }}
             </h3>
-            <v-chip class="ma-2" color="blue-darken-1" text-color="white" prepend-icon="mdi-link" @click="openFeedSource">
+            <v-chip class="ma-2" color="blue-darken-1" text-color="white" prepend-icon="mdi-link"
+                @click="openFeedSourceUrl">
                 צפה במקור
             </v-chip>
         </v-card-title>
@@ -15,8 +16,18 @@
                 <v-icon>
                     {{ feed.subscribed ? 'mdi-bell-off' : 'mdi-bell-plus' }}
                 </v-icon>
-                {{ feed.subscribed ? 'בטל' : 'קבל' }} התראות על תכנים חדשים ({{ feed.subscribersCount }})
+                {{ feed.subscribed ? 'בטל' : 'קבל' }} התראות ({{ feed.subscribersCount }})
             </v-btn>
+            <v-spacer></v-spacer>
+            <v-divider vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" :to="{ name: 'FeedPage', params: { feedId: feed.id } }">
+                <v-icon>
+                    mdi-archive-outline
+                </v-icon>
+                אחרונים
+            </v-btn>
+            <v-spacer></v-spacer>
         </v-card-actions>
     </v-card>
 </template>
@@ -40,15 +51,15 @@ const { feed } = toRefs($props)
 const loadingChangeSubscription = ref(false)
 
 const shortFeedTitle = computed(() => {
-    if (feed.value.title.length > 25) {
-        return feed.value.title.slice(0, 25) + '...'
+    const limitChars = 50
+    if (feed.value.title.length > limitChars) {
+        return feed.value.title.slice(0, limitChars - 3) + '...'
     }
     return feed.value.title
 })
 
-const openFeedSource = () => {
+const openFeedSourceUrl = () => {
     window.open(feed.value.url.replace(/feed|xml|rss$/, ''), '_blank')
-}
 }
 
 const subscribe = async () => {

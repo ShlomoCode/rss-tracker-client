@@ -15,8 +15,9 @@ export const useSnacksStore = defineStore('snacks', () => {
             color: snackbar.type || "red",
             timeout: 2500,
             multiLine: false,
+            ltr: false,
             bottom: !snackbar.right && !snackbar.top && !snackbar.left ? true : false,
-            ...snackbar // override defaults
+            ...snackbar // override defaults with user provided options
         });
     }
 

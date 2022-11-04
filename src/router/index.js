@@ -4,6 +4,11 @@ import LoginView from '@/views/LoginPage.vue'
 import NotFoundView from '@/views/NotFound.vue'
 import VerifyView from '@/views/VerifyPage.vue'
 import SubscriptionsView from '@/views/SubscriptionsPage.vue'
+import ArticleView from '@/views/ArticlePage.vue'
+import FeedView from '@/views/FeedPage.vue'
+import TagView from '@/views/TagPage.vue'
+import ForgotPasswordView from '@/views/ForgotPasswordPage.vue'
+
 import { useUserStore } from '@/stores/user'
 import { useSnacksStore } from '@/stores/snacks'
 
@@ -16,7 +21,8 @@ const router = createRouter({
       component: HomeView,
       meta: {
         requiresLogin: false,
-        requiresVerification: false
+        requiresVerification: false,
+        viewName: 'דף הבית',
       }
     },
     {
@@ -25,11 +31,26 @@ const router = createRouter({
       component: LoginView,
       meta: {
         requiresLogin: false,
-        requiresVerification: false
+        requiresVerification: false,
+        viewName: 'כניסה למערכת',
       },
       props: (route) => ({
         register: String(route.query.register) === '1',
         nextRoute: route.query.next
+      })
+    },
+    {
+      path: '/reset-password',
+      name: 'ForgotPasswordPage',
+      component: ForgotPasswordView,
+      meta: {
+        requiresLogin: false,
+        requiresVerification: false,
+        viewName: 'איפוס סיסמה',
+      },
+      props: (route) => ({
+        token: route.query.code,
+        email: route.query.email
       })
     },
     {
@@ -38,7 +59,8 @@ const router = createRouter({
       component: VerifyView,
       meta: {
         requiresLogin: true,
-        requiresVerification: false
+        requiresVerification: false,
+        viewName: 'אימות חשבון',
       },
       props: (route) => ({
         code: route.query.code,
@@ -51,6 +73,49 @@ const router = createRouter({
       component: SubscriptionsView,
       meta: {
         requiresLogin: true,
+        requiresVerification: true,
+        viewName: 'ניהול המנויים',
+      }
+    },
+    {
+      path: '',
+      children: [
+        {
+          path: 'articles/:articleId',
+          name: 'ArticlePage',
+          component: ArticleView,
+          props: (route) => ({
+            articleId: route.params.articleId,
+          }),
+          meta: {
+            viewName: 'מאמר'
+          }
+        },
+        {
+          path: 'feeds/:feedId',
+          name: 'FeedPage',
+          component: FeedView,
+          props: (route) => ({
+            feedId: route.params.feedId
+          }),
+          meta: {
+            viewName: 'פיד'
+          }
+        },
+        {
+          path: 'tags/:tagName',
+          name: 'TagPage',
+          component: TagView,
+          props: (route) => ({
+            tagName: route.params.tagName,
+          }),
+          meta: {
+            viewName: 'תגית'
+          }
+        }
+      ],
+      meta: {
+        requiresLogin: true,
         requiresVerification: true
       }
     },
@@ -60,7 +125,8 @@ const router = createRouter({
       component: NotFoundView,
       meta: {
         requiresLogin: false,
-        requiresVerification: false
+        requiresVerification: false,
+        viewName: 'הדף לא נמצא',
       }
     }
   ],
@@ -83,8 +149,7 @@ router.beforeEach(to => {
         next: to.fullPath
       }
     }
-  }
-  if (to.meta.requiresVerification && !userStore.isVerified) {
+  } else if (to.meta.requiresVerification && !userStore.isVerified) {
     snacksStore.addSnack({
       type: 'error',
       text: 'כדי לגשת לדף זה עליך לאמת את הדוא"ל שלך, אנא אמת את הדוא"ל',
@@ -97,8 +162,7 @@ router.beforeEach(to => {
         next: to.fullPath
       }
     }
-  }
-  if (to.name === 'LoginPage' && userStore.isLoggedIn) {
+  } else if (to.name === 'LoginPage' && userStore.isLoggedIn) {
     if (to.query.next) {
       return {
         path: to.query.next
@@ -108,8 +172,7 @@ router.beforeEach(to => {
         name: 'HomePage',
       }
     }
-  }
-  if (to.name === 'VerifyPage' && userStore.isVerified) {
+  } else if (to.name === 'VerifyPage' && userStore.isVerified) {
     if (to.query.next) {
       return {
         path: to.query.next

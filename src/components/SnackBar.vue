@@ -1,7 +1,9 @@
 <template>
     <template v-for="snack in snacksStore.snacks" :key="snack.id">
         <v-snackbar v-model="snack.show" v-bind="snack">
-            {{ snack.text }}
+            <div :style="snack.ltr ? 'direction: ltr !important;' : ''">
+                {{ snack.text }}
+            </div>
             <template v-slot:actions>
                 <v-btn color="black" @click="snack.show = false">
                     אוקיי

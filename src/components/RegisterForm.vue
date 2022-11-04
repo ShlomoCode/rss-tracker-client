@@ -15,7 +15,9 @@
                     :error-messages="passwordInvalidMsg" />
                 <v-col cols="12" class="text-left">
                     <v-btn type="submit" color="success" :loading="loading">
-                        <v-icon>mdi-account-plus</v-icon>
+                        <v-icon>
+                            mdi-account-plus
+                        </v-icon>
                         הרשמה
                     </v-btn>
                 </v-col>
@@ -25,7 +27,9 @@
         <v-card-actions>
             כבר יש לך חשבון?
             <v-btn color="info" @click="toggleFormShow()">
-                <v-icon>mdi-login</v-icon>
+                <v-icon>
+                    mdi-login
+                </v-icon>
                 התחבר
             </v-btn>
         </v-card-actions>
