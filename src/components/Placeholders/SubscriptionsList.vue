@@ -8,7 +8,7 @@
                         <h3>
                             לורם איפסום דולור
                         </h3>
-                        <v-chip class="ma-2" color="indigo" text-color="white" prepend-icon="mdi-link">
+                        <v-chip class="ma-2" color="blue-darken-1" prepend-icon="mdi-link">
                             לורם איפסום
                         </v-chip>
                     </v-card-title>
@@ -26,3 +26,6 @@
         </v-row>
     </div>
 </template>
+
+<script setup>
+</script>

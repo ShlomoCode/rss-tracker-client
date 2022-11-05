@@ -2,7 +2,7 @@
     <div>
         <v-card width="400" class="mx-auto mt-3 mb-3">
             <v-card-title>
-                <h2 class="display-1">
+                <h2 class="text-h4">
                     איפוס סיסמה
                 </h2>
             </v-card-title>

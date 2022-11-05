@@ -4,7 +4,9 @@
             <template v-if="article.image">
                 <v-row>
                     <v-col cols="12" sm="4">
-                        <v-img :src="article.image" height="150px" class="mt-2 mr-1" />
+                        <v-card width="95%" height="100%" class="mx-auto">
+                            <v-img :src="article.image" :alt="article.title" width="100%" />
+                        </v-card>
                     </v-col>
                     <v-col>
                         <h3 class="text-h5 mt-2" :class="sm || xs ? 'mr-3' : ''">
@@ -29,7 +31,7 @@
                 <template v-if="!xs">
                     <template v-for="tagName in article.tags.slice(0, 7)" :key="tagName">
                         <v-expand-transition mode="out-in">
-                            <v-chip :size="sm ? 'small' : 'small'" class="ma-1" color="blue-darken-1" text-color="white"
+                            <v-chip :size="sm ? 'small' : 'small'" class="ma-1" color="blue-darken-1"
                                 :to="{ name: 'TagPage', params: { tagName } }"
                                 @click.prevent="$router.push({ name: 'TagPage', params: { tagName } })">
                                 <v-icon class="rotate">
@@ -44,7 +46,7 @@
                     <v-spacer></v-spacer>
                 </template>
                 <v-spacer></v-spacer>
-                <v-btn color="black" class="mr-1" text>
+                <v-btn color="black" class="mr-1" variant="text">
                     <v-icon>
                         mdi-calendar
                     </v-icon>

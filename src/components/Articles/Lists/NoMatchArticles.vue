@@ -2,7 +2,7 @@
     <div>
         <template v-if="!error">
             <v-card>
-                <v-card-title class="headline">אין מאמרים מתאימים להצגה</v-card-title>
+                <v-card-title class="text-h5">אין מאמרים מתאימים להצגה</v-card-title>
                 <v-card-text>
                     שים לב שהמאמרים נמחקים אוטומטית ולצמיתות לאחר 14 יום
                 </v-card-text>

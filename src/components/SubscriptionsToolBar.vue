@@ -11,7 +11,7 @@
             </v-col>
             <v-btn color="secondary" class="mt-6 ml-5">
                 <AddFeedDialog />
-                <v-icon left>
+                <v-icon start>
                     mdi-plus-circle
                 </v-icon>
                 הוסף מקור חדש

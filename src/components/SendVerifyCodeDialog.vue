@@ -20,11 +20,11 @@
                 </template>
             </v-card-text>
             <v-card-actions>
-                <v-btn color="primary" text :disabled="loading" @click="sendCodeAndCloseDialog()">
+                <v-btn color="primary" variant="text" :disabled="loading" @click="sendCodeAndCloseDialog()">
                     בדקתי ואין שום קוד - בבקשה שלח לי חדש!
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="green" text :disabled="loading" @click="open = false">
+                <v-btn color="green" variant="text" :disabled="loading" @click="open = false">
                     הממ... אבדוק שוב ואעדכן :)
                 </v-btn>
             </v-card-actions>

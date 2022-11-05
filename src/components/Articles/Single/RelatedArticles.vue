@@ -1,5 +1,5 @@
 <template>
-    <v-card :class="{ 'ml-6': !smAndDown, 'mb-1': true }" elevation="0" outlined>
+    <v-card :class="{ 'ml-6': !smAndDown, 'mb-1': true }" elevation="0">
         <v-card-title>
             <h3>
                 <v-icon>

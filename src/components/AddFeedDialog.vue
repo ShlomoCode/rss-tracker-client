@@ -1,20 +1,20 @@
 <template>
     <v-dialog v-model="showAddFeedDialog" activator="parent" :persistent="loadingAddFeed">
         <v-card>
-            <v-card-title class="headline">הוספת מקור חדש</v-card-title>
+            <v-card-title class="text-h5">הוספת מקור חדש</v-card-title>
             <v-progress-linear v-if="loadingAddFeed" color="green" indeterminate />
             <v-form @submit.prevent="addFeed">
                 <v-card-text>
-                    <v-text-field autofocus v-model="newFeedUrl" label="כתובת המקור" outlined type="url"
+                    <v-text-field autofocus v-model="newFeedUrl" label="כתובת המקור" variant="outlined" type="url"
                         :rules="[val => !!val || 'שדה חובה', val => validator.isURL(val) || 'כתובת לא תקינה']"
                         :disabled="loadingAddFeed"></v-text-field>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="green darken-1" text @click="showAddFeedDialog = false" :disabled="loadingAddFeed">
+                    <v-btn color="green-darken-1" variant="text" @click="showAddFeedDialog = false" :disabled="loadingAddFeed">
                         ביטול
                     </v-btn>
-                    <v-btn color="green darken-1" text type="submit" :disabled="loadingAddFeed">
+                    <v-btn color="green-darken-1" variant="text" type="submit" :disabled="loadingAddFeed">
                         הוספה
                     </v-btn>
                 </v-card-actions>

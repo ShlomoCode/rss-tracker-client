@@ -1,7 +1,7 @@
 <template>
     <v-card width="400" class="mx-auto mt-3 mb-3">
         <v-card-title>
-            <h2 class="display-1">התחברות</h2>
+            <h2 class="text-h4">התחברות</h2>
         </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="login()">

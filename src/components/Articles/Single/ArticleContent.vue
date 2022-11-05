@@ -13,7 +13,9 @@
             </template>
         </v-card-text>
         <v-divider class="mb-2" />
-        <v-img :src="article.image" :alt="article.title" :max-height="smAndDown ? 250 : 400" />
+        <v-card width="82%" class="mx-auto">
+            <v-img :src="article.image" :alt="article.title" width="100%" />
+        </v-card>
         <v-card-text class="text-center">
             <v-icon>
                 mdi-calendar-clock
@@ -34,7 +36,7 @@
         <v-divider></v-divider>
         <v-card-text class="text-center">
             <template v-for="tag in article.tags" :key="tag">
-                <v-chip size="small" :class="smAndDown ? 'ma-1 mx-2' : 'mx-2'" color="blue-darken-1" text-color="white"
+                <v-chip size="small" :class="smAndDown ? 'ma-1 mx-2' : 'mx-2'" color="blue-darken-1"
                     @click="openTagPage(tag)">
                     <v-icon class="rotate">
                         mdi-label-outline

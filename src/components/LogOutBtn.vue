@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-btn @click="logout()" :loading="loading">
-            <v-icon left>mdi-logout</v-icon>
+            <v-icon start>mdi-logout</v-icon>
             יציאה
         </v-btn>
     </div>

@@ -1,7 +1,7 @@
 <template>
     <v-card width="400" class="mx-auto mt-3 mb-3">
         <v-card-title>
-            <h2 class="display-1">הרשמה</h2>
+            <h2 class="text-h4">הרשמה</h2>
         </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="register()">
@@ -87,7 +87,7 @@ const register = async () => {
 const validateForm = ref(false);
 
 const nameInvalid = computed(() => {
-    return  validateForm.value && !validator.isLength(name.value, { min: 2, max: 15 });
+    return validateForm.value && !validator.isLength(name.value, { min: 2, max: 15 });
 });
 
 const nameInvalidMsg = computed(() => {

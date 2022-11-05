@@ -11,7 +11,7 @@
     <v-btn v-if="isLoggedIn && isVerified" :to="{ name: 'SubscriptionsPage' }">ניהול המנויים</v-btn>
     <template v-if="!isLoggedIn">
       <v-btn :to="{ name: 'LoginPage' }">
-        <v-icon left>mdi-login</v-icon>
+        <v-icon start>mdi-login</v-icon>
         התחברות
       </v-btn>
     </template>

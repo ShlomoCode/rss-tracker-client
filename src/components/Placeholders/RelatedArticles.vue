@@ -1,6 +1,6 @@
 <template>
     <div style="filter: blur(7px);">
-        <v-card :class="{ 'ml-6': !smAndDown, 'mb-1': true }" elevation="0" outlined>
+        <v-card :class="{ 'ml-6': !smAndDown, 'mb-1': true }" elevation="0" variant="outlined">
             <v-card-title>
                 <h3>
                     <v-icon>

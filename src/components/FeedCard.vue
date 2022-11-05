@@ -4,8 +4,7 @@
             <h3>
                 {{ shortFeedTitle }}
             </h3>
-            <v-chip class="ma-2" color="blue-darken-1" text-color="white" prepend-icon="mdi-link"
-                @click="openFeedSourceUrl">
+            <v-chip class="ma-2" color="blue-darken-1" prepend-icon="mdi-link" @click="openFeedSourceUrl">
                 צפה במקור
             </v-chip>
         </v-card-title>

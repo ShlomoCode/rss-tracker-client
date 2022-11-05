@@ -10,7 +10,7 @@
                 <v-spacer></v-spacer>
                 <v-col cols="10" justify="center">
                     <v-card>
-                        <v-card-title class="headline">אין פידים מתאימים להצגה</v-card-title>
+                        <v-card-title class="text-h5">אין פידים מתאימים להצגה</v-card-title>
                         <v-card-text>
                             ניתן להוסיף פידים חדשים באמצעות לחיצה על הכפתור "הוסף מקור חדש" בצד שמאל
                         </v-card-text>

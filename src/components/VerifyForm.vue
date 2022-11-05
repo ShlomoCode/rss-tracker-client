@@ -1,7 +1,7 @@
 <template>
     <v-card width="400" class="mx-auto mt-3 mb-3">
         <v-card-title>
-            <h2 class="display-1">אימות דוא"ל</h2>
+            <h2 class="text-h4">אימות דוא"ל</h2>
         </v-card-title>
         <v-card-text>
             <b>
@@ -14,7 +14,7 @@
                 <v-text-field autofocus reverse required label="קוד אימות" prepend-icon="mdi-lock-check" v-model="code" inputmode="numeric"
                     :error="codeInvalid" :error-messages="codeInvalidMsg" />
                 <v-col cols="12" class="text-left">
-                    <v-btn left type="submit" color="success" :loading="loading">
+                    <v-btn location="left" type="submit" color="success" :loading="loading">
                         שלח
                     </v-btn>
                 </v-col>
