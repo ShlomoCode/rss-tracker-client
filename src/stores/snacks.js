@@ -16,7 +16,7 @@ export const useSnacksStore = defineStore('snacks', () => {
             timeout: 2500,
             multiLine: false,
             ltr: false,
-            bottom: !snackbar.right && !snackbar.top && !snackbar.left ? true : false,
+            location: "bottom",
             ...snackbar // override defaults with user provided options
         });
     }

@@ -140,8 +140,7 @@ router.beforeEach(to => {
     snacksStore.addSnack({
       type: 'error',
       text: 'כדי לגשת לדף זה עליך להיות מחובר לחשבון, אנא התחבר',
-      timeout: 2800,
-      top: true,
+      timeout: 2800
     });
     return {
       name: 'LoginPage',
@@ -153,8 +152,7 @@ router.beforeEach(to => {
     snacksStore.addSnack({
       type: 'error',
       text: 'כדי לגשת לדף זה עליך לאמת את הדוא"ל שלך, אנא אמת את הדוא"ל',
-      timeout: 2800,
-      top: true,
+      timeout: 2800
     });
     return {
       name: 'VerifyPage',
