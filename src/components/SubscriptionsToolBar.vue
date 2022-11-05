@@ -6,7 +6,7 @@
                 <v-switch v-model="showOnlySubs" color="green" label="הצג רק מנויים פעילים" />
             </v-col>
             <v-col cols="12" sm="3" md="2" class="mt-0">
-                <v-text-field v-model.trim="search" class="ml-1" variant="underlined" label="חיפוש"
+                <v-text-field v-model.trim="search" class="ml-1" variant="underlined" label="חיפוש" inputmode="search"
                     prepend-inner-icon="mdi-magnify" append-inner-icon="mdi-close" @click:append-inner="search = ''" />
             </v-col>
             <v-btn color="secondary" class="mt-6 ml-5">

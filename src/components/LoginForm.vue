@@ -5,7 +5,7 @@
         </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="login()">
-                <v-text-field autofocus reverse required label="כתובת אימייל" prepend-icon="mdi-email" v-model="email"
+                <v-text-field autofocus reverse required label="כתובת אימייל" prepend-icon="mdi-email" v-model="email" inputmode="email"
                     :error="emailInvalid" :error-messages="emailInvalidMsg" />
                 <v-text-field v-model="password" required :type="showPassword ? 'text' : 'password'" label="סיסמה"
                     prepend-icon="mdi-lock" :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"

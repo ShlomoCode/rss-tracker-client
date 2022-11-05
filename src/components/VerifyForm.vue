@@ -11,7 +11,7 @@
         </v-card-text>
         <v-card-text>
             <v-form @submit.prevent="verify()">
-                <v-text-field autofocus reverse required label="קוד אימות" prepend-icon="mdi-lock-check" v-model="code"
+                <v-text-field autofocus reverse required label="קוד אימות" prepend-icon="mdi-lock-check" v-model="code" inputmode="numeric"
                     :error="codeInvalid" :error-messages="codeInvalidMsg" />
                 <v-col cols="12" class="text-left">
                     <v-btn left type="submit" color="success" :loading="loading">

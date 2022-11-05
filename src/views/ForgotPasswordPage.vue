@@ -9,8 +9,8 @@
             <v-card-text>
                 <v-form @submit.prevent="changePassword()">
                     <v-text-field autofocus reverse required label="כתובת אימייל" prepend-icon="mdi-email"
-                        v-model="email" :error="emailInvalid" :error-messages="emailInvalidMsg" />
-                    <v-text-field v-model="token" required label="קוד האימות שקיבלת במייל"
+                        inputmode="email" v-model="email" :error="emailInvalid" :error-messages="emailInvalidMsg" />
+                    <v-text-field v-model="token" required label="קוד האימות שקיבלת במייל" inputmode="numeric"
                         prepend-icon="mdi-form-textbox-password" :error="tokenInvalid"
                         :error-messages="tokenInvalidMsg" />
                     <v-text-field v-model="password" required :type="showPassword ? 'text' : 'password'"

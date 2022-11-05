@@ -5,7 +5,7 @@
             <v-progress-linear v-if="loadingAddFeed" color="green" indeterminate />
             <v-form @submit.prevent="addFeed">
                 <v-card-text>
-                    <v-text-field autofocus v-model="newFeedUrl" label="כתובת המקור" outlined
+                    <v-text-field autofocus v-model="newFeedUrl" label="כתובת המקור" outlined type="url"
                         :rules="[val => !!val || 'שדה חובה', val => validator.isURL(val) || 'כתובת לא תקינה']"
                         :disabled="loadingAddFeed"></v-text-field>
                 </v-card-text>

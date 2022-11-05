@@ -7,7 +7,7 @@
             <v-form @submit.prevent="register()">
                 <v-text-field autofocus label="שם פרטי" prepend-icon="mdi-account" v-model="name" :error="nameInvalid"
                     :error-messages="nameInvalidMsg" />
-                <v-text-field reverse label="כתובת אימייל" prepend-icon="mdi-email" v-model="email"
+                <v-text-field reverse label="כתובת אימייל" prepend-icon="mdi-email" v-model="email" inputmode="email"
                     :error="emailInvalid" :error-messages="emailInvalidMsg" />
                 <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'" label="סיסמה"
                     prepend-icon="mdi-lock" :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
