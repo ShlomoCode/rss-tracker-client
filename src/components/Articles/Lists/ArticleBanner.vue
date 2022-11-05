@@ -34,7 +34,7 @@
                             <v-chip :size="sm ? 'small' : 'small'" class="ma-1" color="blue-darken-1"
                                 :to="{ name: 'TagPage', params: { tagName } }"
                                 @click.prevent="$router.push({ name: 'TagPage', params: { tagName } })">
-                                <v-icon class="rotate">
+                                <v-icon class="rotate-180 ml-1">
                                     mdi-label-outline
                                 </v-icon>
                                 {{ tagName }}

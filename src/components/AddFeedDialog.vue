@@ -11,7 +11,7 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="green-darken-1" variant="text" @click="showAddFeedDialog = false" :disabled="loadingAddFeed">
+                    <v-btn variant="text" @click="showAddFeedDialog = false" :disabled="loadingAddFeed">
                         ביטול
                     </v-btn>
                     <v-btn color="green-darken-1" variant="text" type="submit" :disabled="loadingAddFeed">

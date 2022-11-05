@@ -55,7 +55,9 @@ export const useUserStore = defineStore('user', () => {
             newPassword: password,
             email,
             token
-        })
+        }).then(()=>{
+            clearUser()
+        });
     }
 
     function clearUser () {

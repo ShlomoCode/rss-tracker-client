@@ -7,14 +7,13 @@
             הדף שאתה מנסה לגשת אליו לא נמצא. יש מצב שהכתובת שגויה?
         </v-card-text>
         <v-card-actions>
-            <v-col cols="12" class="text-left">
-                <v-btn color="primary" variant="text" location="left" @click="$router.push({ name: 'HomePage' })">
-                    <v-icon>
-                        mdi-home
-                    </v-icon>
-                    קח אותי מפה!
-                </v-btn>
-            </v-col>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" variant="text" location="left" @click="$router.push({ name: 'HomePage' })">
+                <v-icon>
+                    mdi-home
+                </v-icon>
+                קח אותי מפה!
+            </v-btn>
         </v-card-actions>
     </v-card>
 </template>

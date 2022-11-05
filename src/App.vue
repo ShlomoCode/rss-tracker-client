@@ -30,7 +30,7 @@ const { smAndDown } = useDisplay();
 onErrorCaptured((error) => {
   snacksStore.addSnack({
     text: 'Unhandled Error: ' + error.message,
-    color: 'error',
+    type: 'error',
     ltr: true,
   });
 });

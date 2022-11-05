@@ -1,5 +1,7 @@
 <template>
-  <AboutCard />
+  <v-row>
+    <AboutCard />
+  </v-row>
 </template>
 
 <script setup>
