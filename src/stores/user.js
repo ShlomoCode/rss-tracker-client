@@ -4,7 +4,6 @@ import axios from '@/services/axios'
 
 export const useUserStore = defineStore('user', () => {
     const initialUserState = {
-        name: '',
         email: '',
         verified: false
     }
@@ -31,8 +30,8 @@ export const useUserStore = defineStore('user', () => {
             })
     }
 
-    function register ({ name, email, password }) {
-        return axios.post('users/signup', { name, email, password })
+    function register ({ email, password }) {
+        return axios.post('users/signup', { email, password })
     }
 
     function verifyEmail (code) {

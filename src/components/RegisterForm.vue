@@ -5,8 +5,6 @@
         </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="register()">
-                <v-text-field autofocus label="שם פרטי" prepend-icon="mdi-account" v-model="name" :error="nameInvalid"
-                    :error-messages="nameInvalidMsg" />
                 <v-text-field reverse label="כתובת אימייל" prepend-icon="mdi-email" v-model="email" inputmode="email"
                     :error="emailInvalid" :error-messages="emailInvalidMsg" />
                 <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'" label="סיסמה"
@@ -46,7 +44,6 @@ import { useSnacksStore } from "@/stores/snacks";
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
 
-const name = ref('');
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
@@ -59,12 +56,11 @@ const toggleFormShow = () => {
 const loading = ref(false);
 const register = async () => {
     validateForm.value = true;
-    if (nameInvalid.value || emailInvalid.value || passwordInvalid.value) return;
+    if (emailInvalid.value || passwordInvalid.value) return;
 
     loading.value = true;
     try {
         await userStore.register({
-            name: name.value,
             email: email.value,
             password: password.value
         })
@@ -85,17 +81,6 @@ const register = async () => {
 }
 
 const validateForm = ref(false);
-
-const nameInvalid = computed(() => {
-    return validateForm.value && !validator.isLength(name.value, { min: 2, max: 15 });
-});
-
-const nameInvalidMsg = computed(() => {
-    if (!validateForm.value) return '';
-    if (!name.value.length) return 'שדה חובה';
-    if (!validator.isLength(name.value, { min: 2, max: 15 })) return 'שם פרטי חייב להיות בין 2 ל-15 תווים';
-    return '';
-});
 
 const emailInvalid = computed(() => {
     return validateForm.value && !validator.isEmail(email.value);
