@@ -40,6 +40,7 @@ const errorMsg = ref('')
 try {
     const { data } = await axios.get(`/articles/${articleId.value}`);
     article.value = data.article;
+    document.title = `Rss Tracker - ${article.value.title}`;
 } catch (error) {
     errorMsg.value = error.message;
     snacksStore.addSnack({

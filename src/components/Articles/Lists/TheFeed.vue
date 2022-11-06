@@ -49,6 +49,7 @@ try {
     const { data } = await axios.get(`/articles/by-feed-id/${feedId.value}`);
     articles.value = data.articles;
     feed.value = data.feed;
+    document.title = `Rss Tracker - ${feed.value.title}`;
 } catch (error) {
     errorMsg.value = error.message;
     snacksStore.addSnack({

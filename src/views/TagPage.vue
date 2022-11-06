@@ -27,4 +27,5 @@ const $props = defineProps({
 })
 
 const { tagName } = toRefs($props);
+document.title = `Rss Tracker - ${tagName.value}`;
 </script>

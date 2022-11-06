@@ -16,13 +16,23 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'HomePage',
+      component: HomeView,
+      meta: {
+        viewName: 'דף הבית',
+        requiresLogin: false,
+        requiresVerification: false,
+      }
+    },
+    {
       path: '/login',
       name: 'LoginPage',
       component: LoginView,
       meta: {
+        viewName: 'כניסה למערכת',
         requiresLogin: false,
         requiresVerification: false,
-        viewName: 'כניסה למערכת',
       },
       props: (route) => ({
         register: String(route.query.register) === '1',
@@ -34,9 +44,9 @@ const router = createRouter({
       name: 'ForgotPasswordPage',
       component: ForgotPasswordView,
       meta: {
+        viewName: 'איפוס סיסמה',
         requiresLogin: false,
         requiresVerification: false,
-        viewName: 'איפוס סיסמה',
       },
       props: (route) => ({
         token: route.query.code,
@@ -48,9 +58,9 @@ const router = createRouter({
       name: 'VerifyPage',
       component: VerifyView,
       meta: {
+        viewName: 'אימות חשבון',
         requiresLogin: true,
         requiresVerification: false,
-        viewName: 'אימות חשבון',
       },
       props: (route) => ({
         code: route.query.code,
@@ -62,61 +72,48 @@ const router = createRouter({
       name: 'SubscriptionsPage',
       component: SubscriptionsView,
       meta: {
+        viewName: 'ניהול המנויים',
         requiresLogin: true,
         requiresVerification: true,
-        viewName: 'ניהול המנויים',
       }
     },
     {
-      path: '',
-      children: [
-        {
-          path: '',
-          name: 'HomePage',
-          component: HomeView,
-          meta: {
-            requiresLogin: false,
-            requiresVerification: false,
-            viewName: 'דף הבית',
-          }
-        },
-        {
-          path: 'articles/:articleId',
-          name: 'ArticlePage',
-          component: ArticleView,
-          props: (route) => ({
-            articleId: route.params.articleId,
-          }),
-          meta: {
-            viewName: 'מאמר'
-          }
-        },
-        {
-          path: 'feeds/:feedId',
-          name: 'FeedPage',
-          component: FeedView,
-          props: (route) => ({
-            feedId: route.params.feedId
-          }),
-          meta: {
-            viewName: 'פיד'
-          }
-        },
-        {
-          path: 'tags/:tagName',
-          name: 'TagPage',
-          component: TagView,
-          props: (route) => ({
-            tagName: route.params.tagName,
-          }),
-          meta: {
-            viewName: 'תגית'
-          }
-        }
-      ],
+      path: '/articles/:articleId',
+      name: 'ArticlePage',
+      component: ArticleView,
+      props: (route) => ({
+        articleId: route.params.articleId,
+      }),
       meta: {
+        viewName: 'מאמר',
         requiresLogin: true,
         requiresVerification: true
+      }
+    },
+    {
+      path: '/feeds/:feedId',
+      name: 'FeedPage',
+      component: FeedView,
+      props: (route) => ({
+        feedId: route.params.feedId
+      }),
+      meta: {
+        viewName: 'פיד',
+        requiresLogin: true,
+        requiresVerification: true
+      }
+    },
+    {
+      path: '/tags/:tagName',
+      name: 'TagPage',
+      component: TagView,
+      props: (route) => ({
+        tagName: route.params.tagName,
+      }),
+      meta: {
+        viewName: 'תגית',
+        requiresLogin: true,
+        requiresVerification: true,
       }
     },
     {
@@ -124,9 +121,9 @@ const router = createRouter({
       name: 'NotFound',
       component: NotFoundView,
       meta: {
+        viewName: 'הדף לא נמצא',
         requiresLogin: false,
         requiresVerification: false,
-        viewName: 'הדף לא נמצא',
       }
     }
   ],
@@ -182,5 +179,9 @@ router.beforeEach(to => {
     }
   }
 })
+
+router.afterEach(to => {
+  document.title = to.meta.viewName ? `Rss Tracker - ${to.meta.viewName}` : 'Rss Tracker';
+});
 
 export default router
