@@ -42,7 +42,7 @@ export const useUserStore = defineStore('user', () => {
     }
 
     function sendVerifyEmail () {
-        return axios.post('users/resendVerificationEmail')
+        return axios.post('users/send-verification-email')
     }
 
     function sendPasswordForgotEmail (email) {
