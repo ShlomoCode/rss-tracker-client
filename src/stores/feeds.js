@@ -6,7 +6,7 @@ export const useFeedsStore = defineStore('feeds', () => {
     const feeds = ref([])
 
     function createFeed (feedUrl) {
-        return axios.post('feeds', { url: feedUrl }).then(({ data }) => {
+        return axios.post('/feeds', { url: feedUrl }).then(({ data }) => {
             const { feed } = data;
             feeds.value.push({
                 id: feed.id,
@@ -19,7 +19,7 @@ export const useFeedsStore = defineStore('feeds', () => {
     }
 
     function subscribeToFeed (feedId) {
-        return axios.post(`subscriptions/${feedId}`)
+        return axios.post(`/subscriptions/${feedId}`)
             .then(() => {
                 const feedIndex = feeds.value.findIndex(feed => feed.id === feedId)
                 feeds.value[feedIndex].subscribed = true
@@ -28,7 +28,7 @@ export const useFeedsStore = defineStore('feeds', () => {
         }
         
         function unsubscribeFromFeed (feedId) {
-            return axios.delete(`subscriptions/${feedId}`)
+            return axios.delete(`/subscriptions/${feedId}`)
             .then(() => {
                 const feedIndex = feeds.value.findIndex(feed => feed.id === feedId)
                 feeds.value[feedIndex].subscribed = false
@@ -37,7 +37,7 @@ export const useFeedsStore = defineStore('feeds', () => {
     }
 
     function fetchFeeds () {
-        return axios.get('feeds').then(({ data }) => {
+        return axios.get('/feeds').then(({ data }) => {
             feeds.value = data.feeds.map(feed => ({
                 id: feed.id,
                 subscribersCount: feed.subscribers,

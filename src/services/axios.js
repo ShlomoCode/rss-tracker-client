@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user';
 import router from '@/router/index';
 
 const axiosInstance = axios.create({
-    baseURL: '/api/',
+    baseURL: import.meta.env.PROD && import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/api' : '/api',
 });
 
 axiosInstance.interceptors.response.use(
@@ -11,7 +11,7 @@ axiosInstance.interceptors.response.use(
     error => {
         if (error.response && error.response.status === 401) {
             const userStore = useUserStore();
-            switch (error.response.headers['action-required']) {
+            switch (error.response.headers['client-action-required']) {
                 case 'login':
                     userStore.clearUser();
                     router.push({

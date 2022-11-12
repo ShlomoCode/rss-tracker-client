@@ -24,33 +24,33 @@ export const useUserStore = defineStore('user', () => {
     const isVerified = computed(() => user.verified)
 
     function login ({ email, password }) {
-        return axios.post('users/login', { email, password })
+        return axios.post('/users/login', { email, password })
             .then(({ data }) => {
                 Object.assign(user, data.user)
             })
     }
 
     function register ({ email, password }) {
-        return axios.post('users/signup', { email, password })
+        return axios.post('/users/signup', { email, password })
     }
 
     function verifyEmail (code) {
-        return axios.post('users/verify', { code })
+        return axios.post('/users/verify', { code })
             .then(() => {
                 user.verified = true
             })
     }
 
     function sendVerifyEmail () {
-        return axios.post('users/send-verification-email')
+        return axios.post('/users/send-verification-email')
     }
 
     function sendPasswordForgotEmail (email) {
-        return axios.post('users/forgot-password', { email })
+        return axios.post('/users/forgot-password', { email })
     }
 
     function changePassword ({ email, token, password }) {
-        return axios.post('users/change-password', {
+        return axios.post('/users/change-password', {
             newPassword: password,
             email,
             token
@@ -65,7 +65,7 @@ export const useUserStore = defineStore('user', () => {
 
     function logout () {
         clearUser()
-        return axios.post('users/logout')
+        return axios.post('/users/logout')
     }
 
     return {

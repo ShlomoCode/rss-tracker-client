@@ -20,7 +20,7 @@
 
 <script setup>
 import axios from '@/services/axios'
-const { data } = await axios.get('general/statistics')
+const { data } = await axios.get('/general/statistics')
 const statistics = [
     {
         icon: 'mdi-account-group',
