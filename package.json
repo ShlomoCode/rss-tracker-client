@@ -5,7 +5,8 @@
     "dev": "vite --port 4000",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --fix --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
@@ -28,6 +29,7 @@
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "eslint-plugin-vuetify": "^2.0.0-beta.1",
+    "husky": "^8.0.2",
     "vite": "^3.1.8",
     "vite-plugin-vuetify": "^1.0.0-alpha.12",
     "vue-cli-plugin-vuetify": "~2.5.8"
