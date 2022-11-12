@@ -1,8 +1,8 @@
 <template>
-    <v-col cols="12" md="6" lg="8" xs="12">
+    <v-col cols="12" md="8">
         <ArticleContentPlaceholder />
     </v-col>
-    <v-col cols="12" md="6" lg="4" xs="12">
+    <v-col cols="12" md="4">
         <RelatedArticlesPlaceholder />
     </v-col>
 </template>

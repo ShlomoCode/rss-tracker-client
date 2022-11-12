@@ -1,6 +1,6 @@
 <template>
     <v-spacer></v-spacer>
-    <v-col cols="12" md="3">
+    <v-col cols="12" md="4" lg="3">
         <v-card class="mx-auto ml-2 mr-2 mt-3">
             <v-card-title>
                 <h2>אודות</h2>

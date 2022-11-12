@@ -5,10 +5,11 @@
         </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="login()">
-                <v-text-field autofocus reverse required label="כתובת אימייל" prepend-icon="mdi-email" v-model="email" inputmode="email"
-                    :error="emailInvalid" :error-messages="emailInvalidMsg" />
+                <v-text-field autofocus reverse required label="כתובת אימייל" prepend-icon="mdi-email" v-model="email"
+                    inputmode="email" autocomplete="email" :error="emailInvalid" :error-messages="emailInvalidMsg" />
                 <v-text-field v-model="password" required :type="showPassword ? 'text' : 'password'" label="סיסמה"
-                    prepend-icon="mdi-lock" :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                    autocomplete="current-password" prepend-icon="mdi-lock"
+                    :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                     @click:append-inner="showPassword = !showPassword" :error="passwordInvalid"
                     :error-messages="passwordInvalidMsg" />
                 <v-col cols="12" class="text-left">
@@ -31,7 +32,8 @@
                 הירשם
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn v-if="showForgotPasswordBtn" color="warning" @click="forgotPassword()" :loading="loadingForgotPassword">
+            <v-btn v-if="showForgotPasswordBtn" color="warning" @click="forgotPassword()"
+                :loading="loadingForgotPassword">
                 <v-icon>
                     mdi-lock-question
                 </v-icon>

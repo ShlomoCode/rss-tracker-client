@@ -1,10 +1,10 @@
 <template>
     <template v-if="!errorMsg">
         <v-row>
-            <v-col cols="12" md="8" lg="8" xs="12">
+            <v-col cols="12" md="8">
                 <ArticleContent :article="article" />
             </v-col>
-            <v-col cols="12" md="4" lg="4" xs="12">
+            <v-col cols="12" md="4">
                 <RelatedArticles :articleId="article.id" />
             </v-col>
         </v-row>

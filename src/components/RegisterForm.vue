@@ -6,11 +6,11 @@
         <v-card-text>
             <v-form @submit.prevent="register()">
                 <v-text-field reverse label="כתובת אימייל" prepend-icon="mdi-email" v-model="email" inputmode="email"
-                    :error="emailInvalid" :error-messages="emailInvalidMsg" />
+                    autocomplete="email" :error="emailInvalid" :error-messages="emailInvalidMsg" />
                 <v-text-field v-model="password" :type="showPassword ? 'text' : 'password'" label="סיסמה"
                     prepend-icon="mdi-lock" :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                     @click:append-inner="showPassword = !showPassword" :error="passwordInvalid"
-                    :error-messages="passwordInvalidMsg" />
+                    autocomplete="new-password" :error-messages="passwordInvalidMsg" />
                 <v-col cols="12" class="text-left">
                     <v-btn type="submit" color="success" :loading="loading">
                         <v-icon>
