@@ -1,6 +1,8 @@
 # rss-tracker-client
 
-This template should help get you started developing with Vue 3 in Vite.
+For full info on the project and documentation, see the [server side repo](https://github.com/ShlomoCode/rss-tracker-server).
+
+this is the client side of the project, it is a Vue.js and Vuetify app.
 
 ## Recommended IDE Setup
 
@@ -33,3 +35,11 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Git hooks
+
+-  `pre-commit` - runs lint on staged files
+
+### Env variables
+
+-  `VITE_API_URL` - the url of the server side of the project. if not set, defaults the relative path `/api` on root of the domain.
