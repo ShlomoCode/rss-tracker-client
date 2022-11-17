@@ -21,7 +21,7 @@
 <script setup>
 import validator from 'validator';
 import { toRefs } from 'vue';
-import SingleArticle from '@/components/Articles/Single/TheArticle.vue'
+import SingleArticle from '@/components/Articles/TheArticle.vue'
 import SingleArticlePlaceholder from '@/components/Placeholders/TheArticle.vue';
 
 const $props = defineProps({

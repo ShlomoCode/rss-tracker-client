@@ -1,6 +1,9 @@
 <template>
     <div>
-        <template v-if="articles.length">
+        <template v-if="error">
+            <ErrorFetchAlert :error="error" />
+        </template>
+        <template v-else-if="articles.length">
             <v-divider></v-divider>
             <h2 class="text-center">
                 נמצאו {{ articles.length }} כתבות תחת הפיד "{{ feed.title }}"
@@ -17,7 +20,9 @@
             </template>
         </template>
         <template v-else>
-            <NoMatchArticles :error="errorMsg" />
+            <NotFoundAlert>
+                לא נמצאו מאמרים מתאימים להצגה
+            </NotFoundAlert>
         </template>
     </div>
 </template>
@@ -25,8 +30,9 @@
 <script setup>
 import validator from 'validator';
 import { toRefs, ref } from 'vue';
-import ArticleBanner from '@/components/Articles/Lists/ArticleBanner.vue';
-import NoMatchArticles from '@/components/Articles/Lists/NoMatchArticles.vue';
+import ArticleBanner from '@/components/Articles/ArticleBanner.vue';
+import NotFoundAlert from '@/components/Articles/NotFoundAlert.vue';
+import ErrorFetchAlert from '@/components/Articles/ErrorFetchAlert.vue';
 import { useSnacksStore } from '@/stores/snacks';
 import axios from '@/services/axios';
 
@@ -44,16 +50,20 @@ const { feedId } = toRefs($props);
 
 const articles = ref([]);
 const feed = ref({});
-const errorMsg = ref('')
+const error = ref('')
+
+
+
 try {
+    if (!validator.isMongoId(feedId.value)) throw new Error('כתובת הפיד אינה תקינה');
     const { data } = await axios.get(`/articles/by-feed-id/${feedId.value}`);
     articles.value = data.articles;
     feed.value = data.feed;
     document.title = `Rss Tracker - ${feed.value.title}`;
-} catch (error) {
-    errorMsg.value = error.message;
+} catch (err) {
+    error.value = err.message;
     snacksStore.addSnack({
-        text: error.message,
+        text: err.message,
         color: 'error'
     })
 }

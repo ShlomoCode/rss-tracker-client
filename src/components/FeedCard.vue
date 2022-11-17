@@ -4,7 +4,7 @@
             <h3>
                 {{ shortFeedTitle }}
             </h3>
-            <v-chip class="ma-2" color="blue-darken-1" prepend-icon="mdi-link"
+            <v-chip class="ma-2" color="blue" prepend-icon="mdi-link"
                 :href="feed.url.replace(/feed|xml|rss$/, '')" target="_blank">
                 צפה במקור
             </v-chip>

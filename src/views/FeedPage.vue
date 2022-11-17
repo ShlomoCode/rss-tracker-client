@@ -17,7 +17,7 @@
 <script setup>
 import validator from 'validator';
 import { toRefs } from 'vue';
-import TheFeed from '@/components/Articles/Lists/TheFeed.vue';
+import TheFeed from '@/components/Articles/TheFeed.vue';
 import ArticleBannerPlaceholder from '@/components/Placeholders/ArticleBanner.vue';
 
 const $props = defineProps({

@@ -1,9 +1,12 @@
 <template>
     <div>
-        <template v-if="articles.length">
+        <template v-if="error">
+            <ErrorFetchAlert :error="error" />
+        </template>
+        <template v-else-if="articles.length">
             <v-divider></v-divider>
             <h2 class="text-center">
-               נמצאו {{ articles.length }} כתבות תחת התגית "{{ tagName }}"
+                נמצאו {{ articles.length }} כתבות תחת התגית "{{ tagName }}"
             </h2>
             <v-divider></v-divider>
             <template v-for="article in articles" :key="article.id">
@@ -17,15 +20,18 @@
             </template>
         </template>
         <template v-else>
-            <NoMatchArticles :error="errorMsg" />
+            <NotFoundAlert>
+                לא נמצאו מאמרים מתאימים להצגה
+            </NotFoundAlert>
         </template>
     </div>
 </template>
 
 <script setup>
 import { toRefs, ref } from 'vue';
-import ArticleBanner from '@/components/Articles/Lists/ArticleBanner.vue';
-import NoMatchArticles from '@/components/Articles/Lists/NoMatchArticles.vue';
+import ArticleBanner from '@/components/Articles/ArticleBanner.vue';
+import NotFoundAlert from '@/components/Articles/NotFoundAlert.vue';
+import ErrorFetchAlert from '@/components/Articles/ErrorFetchAlert.vue';
 import axios from '@/services/axios';
 import { useSnacksStore } from '@/stores/snacks';
 
@@ -39,16 +45,16 @@ const $props = defineProps({
 })
 
 const { tagName } = toRefs($props);
-
 const articles = ref([]);
-const errorMsg = ref('');
+const error = ref('');
+
 try {
     const { data } = await axios.get(`/articles/by-tag-name?tagName=${tagName.value}`);
     articles.value = data.articles;
-} catch (error) {
-    errorMsg.value = error.message;
+} catch (err) {
+    error.value = err.message;
     snacksStore.addSnack({
-        text: error.message,
+        text: err.message,
         color: 'error'
     })
 }

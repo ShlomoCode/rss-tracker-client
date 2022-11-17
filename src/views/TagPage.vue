@@ -16,7 +16,7 @@
 
 <script setup>
 import { toRefs } from 'vue';
-import TheTag from '@/components/Articles/Lists/TheTag.vue';
+import TheTag from '@/components/Articles/TheTag.vue';
 import ArticleBannerPlaceholder from '@/components/Placeholders/ArticleBanner.vue';
 
 const $props = defineProps({

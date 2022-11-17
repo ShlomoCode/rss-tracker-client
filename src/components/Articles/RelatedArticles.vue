@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import RelatedArticlesBanner from '@/components/Articles/Single/RelatedArticlesBanner.vue'
+import RelatedArticlesBanner from '@/components/Articles/RelatedArticlesBanner.vue'
 import { toRefs, ref } from 'vue';
 import validator from 'validator';
 import axios from '@/services/axios';

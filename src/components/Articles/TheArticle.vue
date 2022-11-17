@@ -1,5 +1,13 @@
 <template>
-    <template v-if="!errorMsg">
+    <template v-if="isNotFound">
+        <NotFoundAlert>
+            המאמר לא נמצא
+        </NotFoundAlert>
+    </template>
+    <template v-else-if="error">
+        <ErrorPage :error="error" />
+    </template>
+    <template v-else>
         <v-row>
             <v-col cols="12" md="8">
                 <ArticleContent :article="article" />
@@ -9,20 +17,18 @@
             </v-col>
         </v-row>
     </template>
-    <template v-else>
-        <NoMatchArticles :error="errorMsg" />
-    </template>
 </template>
 
 <script setup>
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, computed } from 'vue'
 import validator from 'validator';
 import axios from '@/services/axios';
 import { useSnacksStore } from '@/stores/snacks';
 
-import ArticleContent from '@/components/Articles/Single/ArticleContent.vue'
-import RelatedArticles from '@/components/Articles/Single/RelatedArticles.vue'
-import NoMatchArticles from '@/components/Articles/Lists/NoMatchArticles.vue';
+import ArticleContent from '@/components/Articles/ArticleContent.vue'
+import RelatedArticles from '@/components/Articles/RelatedArticles.vue'
+import NotFoundAlert from '@/components/Articles/NotFoundAlert.vue';
+import ErrorPage from '@/components/Articles/ErrorFetchAlert.vue';
 
 const snacksStore = useSnacksStore();
 const $props = defineProps({
@@ -35,17 +41,22 @@ const $props = defineProps({
 
 const { articleId } = toRefs($props)
 const article = ref({})
-const errorMsg = ref('')
+const isNotFound = ref(false)
+const error = ref('')
 
 try {
     const { data } = await axios.get(`/articles/${articleId.value}`);
     article.value = data.article;
     document.title = `Rss Tracker - ${article.value.title}`;
-} catch (error) {
-    errorMsg.value = error.message;
-    snacksStore.addSnack({
-        text: error.message,
-        color: 'error'
-    })
+} catch (err) {
+    if (err.response && err.response.status === 404) {
+        isNotFound.value = true;
+    } else {
+        error.value = err.message;
+        snacksStore.addSnack({
+            text: err.message,
+            color: 'error'
+        })
+    }
 }
 </script>
