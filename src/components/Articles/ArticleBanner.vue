@@ -3,20 +3,20 @@
         <v-card class="mx-auto mt-2" elevation="1" :to="{ name: 'ArticlePage', params: { articleId: article.id } }">
             <template v-if="article.image">
                 <v-row>
-                    <v-col cols="12" sm="4">
-                        <v-card width="95%" height="100%" class="mx-auto">
+                    <v-col cols="12" sm="4" class="mt-1">
+                        <v-card width="95%" height="100%" class="mx-auto" elevation="0">
                             <v-img :src="article.image" :alt="article.title" width="100%" />
                         </v-card>
                     </v-col>
                     <v-col>
-                        <h3 class="text-h5 mt-2" :class="sm || xs ? 'mr-3' : ''">
+                        <h3 class="text-h5 mt-2 ml-1" :class="sm || xs ? 'mr-3' : ''">
                             {{ article.title }}
                         </h3>
                     </v-col>
                 </v-row>
             </template>
             <template v-else>
-                <h3 class="text-h5 mt-2">
+                <h3 class="text-h5 mt-2 ml-1">
                     {{ shortArticleTitle }}
                 </h3>
             </template>
@@ -29,9 +29,9 @@
             <v-divider v-if="!xs"></v-divider>
             <v-card-actions>
                 <template v-if="!xs">
-                    <template v-for="tagName in article.tags.slice(0, 7)" :key="tagName">
+                    <template v-for="tagName in tagsToDisplay" :key="tagName">
                         <v-expand-transition mode="out-in">
-                            <v-chip :size="sm ? 'small' : 'small'" class="ma-1" color="blue-darken-1"
+                            <v-chip size="small" class="ma-1" color="blue-darken-1"
                                 :to="{ name: 'TagPage', params: { tagName } }"
                                 @click.prevent="$router.push({ name: 'TagPage', params: { tagName } })">
                                 <v-icon class="rotate-180 ml-1">
@@ -50,7 +50,7 @@
                     <v-icon>
                         mdi-calendar
                     </v-icon>
-                    {{ articleDate }}
+                    {{ publishDataAgo }}
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -63,7 +63,7 @@ import TimeAgo from 'javascript-time-ago'
 import he from 'javascript-time-ago/locale/he'
 import { useDisplay } from 'vuetify'
 
-const { sm, xs } = useDisplay()
+const { sm, xs, lg, smAndDown } = useDisplay()
 TimeAgo.addLocale(he)
 const timeAgo = new TimeAgo('he-IL')
 const $props = defineProps({
@@ -83,8 +83,20 @@ const shortArticleTitle = computed(() => {
     return article.value.title
 })
 
-const articleDate = computed(() => {
+const publishDataAgo = computed(() => {
     const date = new Date(article.value.published)
     return timeAgo.format(date)
+})
+
+const tagsToDisplay = computed(() => {
+    let limitTags;
+    if (smAndDown.value) {
+        limitTags = 4
+    } else if (lg.value) {
+        limitTags = 6
+    } else {
+        limitTags = 5
+    }
+    return article.value.tags.filter(tagName => tagName.length <= 16).slice(0, limitTags);
 })
 </script>

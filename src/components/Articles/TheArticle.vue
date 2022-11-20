@@ -10,17 +10,17 @@
     <template v-else>
         <v-row>
             <v-col cols="12" md="8">
-                <ArticleContent :article="article" />
+                <ArticleContent :article="article" @content-height="articleContentHeight = $event" />
             </v-col>
             <v-col cols="12" md="4">
-                <RelatedArticles :articleId="article.id" />
+                <RelatedArticles :articleId="article.id" :articleContentHeight="articleContentHeight" />
             </v-col>
         </v-row>
     </template>
 </template>
 
 <script setup>
-import { ref, toRefs, computed } from 'vue'
+import { ref, toRefs } from 'vue'
 import validator from 'validator';
 import axios from '@/services/axios';
 import { useSnacksStore } from '@/stores/snacks';
@@ -43,6 +43,7 @@ const { articleId } = toRefs($props)
 const article = ref({})
 const isNotFound = ref(false)
 const error = ref('')
+const articleContentHeight = ref(0)
 
 try {
     const { data } = await axios.get(`/articles/${articleId.value}`);

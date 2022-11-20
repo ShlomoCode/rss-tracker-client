@@ -24,3 +24,5 @@
         </v-card>
     </div>
 </template>
+
+<script setup></script>

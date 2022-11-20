@@ -14,7 +14,7 @@
         <v-card :class="{ 'ml-6': !smAndDown, 'mb-0': true }">
             <v-card-text>
                 <v-row>
-                    <template v-for="article in 5" :key="article.id">
+                    <template v-for="article in 3" :key="article">
                         <v-col cols="12">
                             <RelatedArticlesBannerPlaceholder />
                         </v-col>

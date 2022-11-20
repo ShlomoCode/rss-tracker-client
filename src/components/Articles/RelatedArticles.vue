@@ -13,9 +13,9 @@
     <v-card v-if="articlesRelated.length" :class="{ 'ml-6': !smAndDown, 'mb-0': true }">
         <v-card-text>
             <v-row>
-                <template v-for="article in articlesRelated" :key="article.id">
+                <template v-for="(article, index) in articlesRelatedToDisplay" :key="article.id">
                     <v-col cols="12">
-                        <RelatedArticlesBanner :article="article" />
+                        <RelatedArticlesCard :article="article" :last="index + 1 === articlesRelatedToDisplay.length" />
                     </v-col>
                 </template>
             </v-row>
@@ -24,8 +24,8 @@
 </template>
 
 <script setup>
-import RelatedArticlesBanner from '@/components/Articles/RelatedArticlesBanner.vue'
-import { toRefs, ref } from 'vue';
+import RelatedArticlesCard from '@/components/Articles/RelatedArticlesCard.vue'
+import { toRefs, ref, computed } from 'vue';
 import validator from 'validator';
 import axios from '@/services/axios';
 import { useSnacksStore } from '@/stores/snacks';
@@ -39,13 +39,17 @@ const $props = defineProps({
         type: String,
         required: true,
         validator: (value) => validator.isMongoId(value),
+    },
+    articleContentHeight: {
+        type: Number,
+        required: true,
     }
 })
-const { articleId } = toRefs($props);
+const { articleId, articleContentHeight } = toRefs($props);
 const articlesRelated = ref([]);
 
 try {
-    const { data } = await axios.get(`/articles/related-articles?articleId=${articleId.value}&limit=${smAndDown.value ? 3 : 8}`);
+    const { data } = await axios.get(`/articles/related-articles?articleId=${articleId.value}&limit=8`);
     articlesRelated.value = data.articles;
 } catch (error) {
     snacksStore.addSnack({
@@ -53,4 +57,11 @@ try {
         color: 'error'
     })
 }
+
+const articlesRelatedToDisplay = computed(() => {
+    const countByContentHeight = Math.round(articleContentHeight.value / 140);
+    return articlesRelated.value.slice(0, smAndDown.value ? 3 : Math.max(countByContentHeight, 2)).sort((a, b) => {
+        return new Date(b.published) - new Date(a.published)
+    });
+})
 </script>
