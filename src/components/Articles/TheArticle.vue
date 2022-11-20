@@ -46,7 +46,7 @@ const error = ref('')
 const articleContentHeight = ref(0)
 
 try {
-    const { data } = await axios.get(`/articles/${articleId.value}`);
+    const { data } = await axios.get(`/articles/getArticleById/${articleId.value}`);
     article.value = data.article;
     document.title = `Rss Tracker - ${article.value.title}`;
 } catch (err) {

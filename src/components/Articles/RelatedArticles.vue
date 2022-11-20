@@ -49,7 +49,7 @@ const { articleId, articleContentHeight } = toRefs($props);
 const articlesRelated = ref([]);
 
 try {
-    const { data } = await axios.get(`/articles/related-articles?articleId=${articleId.value}&limit=8`);
+    const { data } = await axios.get(`/articles/getRelatedArticles?articleId=${articleId.value}&limit=8`);
     articlesRelated.value = data.articles;
 } catch (error) {
     snacksStore.addSnack({

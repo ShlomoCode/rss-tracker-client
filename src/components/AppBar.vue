@@ -8,7 +8,18 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn v-if="isLoggedIn && !isVerified" :to="{ name: 'VerifyPage' }">אימות דוא"ל</v-btn>
-    <v-btn v-if="isLoggedIn && isVerified" :to="{ name: 'SubscriptionsPage' }">ניהול המנויים</v-btn>
+    <template v-if="isLoggedIn && isVerified">
+      <v-btn :to="{ name: 'UnreadPage' }">
+        <v-icon>
+          mdi-newspaper
+        </v-icon>
+        {{ xs ? '' : 'לא נקראו' }}
+      </v-btn>
+      <v-btn :to="{ name: 'SubscriptionsPage' }">
+        <v-icon>mdi-rss</v-icon>
+        מנויים
+      </v-btn>
+    </template>
     <template v-if="!isLoggedIn">
       <v-btn :to="{ name: 'LoginPage' }">
         <v-icon start>mdi-login</v-icon>
@@ -27,7 +38,9 @@ import { storeToRefs } from 'pinia';
 import { useUserStore } from "@/stores/user.js";
 import { useRouter } from 'vue-router';
 import LogOutBtn from '@/components/LogOutBtn.vue';
+import { useDisplay } from 'vuetify';
 
+const { xs } = useDisplay();
 const $router = useRouter()
 const userStore = useUserStore();
 

@@ -8,6 +8,8 @@ import ArticleView from '@/views/ArticlePage.vue'
 import FeedView from '@/views/FeedPage.vue'
 import TagView from '@/views/TagPage.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordPage.vue'
+import UnreadView from '@/views/UnreadPage.vue'
+import TagsView from '@/views/TagsPage.vue'
 
 import { useUserStore } from '@/stores/user'
 import { useSnacksStore } from '@/stores/snacks'
@@ -79,6 +81,16 @@ const router = createRouter({
       }
     },
     {
+      path: '/unread',
+      name: 'UnreadPage',
+      component: UnreadView,
+      meta: {
+        viewName: 'לא נקראו',
+        requiresLogin: true,
+        requiresVerification: true,
+      }
+    },
+    {
       path: '/articles/:articleId',
       name: 'ArticlePage',
       component: ArticleView,
@@ -105,6 +117,16 @@ const router = createRouter({
       }
     },
     {
+      path: '/tags',
+      name: 'TagsPage',
+      component: TagsView,
+      meta: {
+        viewName: 'תגיות',
+        requiresLogin: true,
+        requiresVerification: true
+      }
+    },
+    {
       path: '/tags/:tagName',
       name: 'TagPage',
       component: TagView,
@@ -113,6 +135,7 @@ const router = createRouter({
       }),
       meta: {
         viewName: 'תגית',
+        dynamicViewName: true,
         requiresLogin: true,
         requiresVerification: true,
       }

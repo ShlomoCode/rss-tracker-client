@@ -30,8 +30,8 @@ import ArticleBanner from '@/components/Articles/ArticleBanner.vue';
 import NotFoundAlert from '@/components/Articles/NotFoundAlert.vue';
 import ErrorFetchAlert from '@/components/Articles/ErrorFetchAlert.vue';
 import LoadingMoreCard from '@/components/Articles/LoadingMoreCard.vue';
-import axios from '@/services/axios';
 import { useSnacksStore } from '@/stores/snacks';
+import axios from '@/services/axios';
 
 const snacksStore = useSnacksStore();
 
@@ -50,7 +50,7 @@ const totalArticles = ref(0);
 const lastArticleElement = ref(null);
 
 try {
-    const { data } = await axios.get(`/articles/by-tag-name?tagName=${tagName.value}`, {
+    const { data } = await axios.get(`/articles/getArticlesByTagName?tagName=${tagName.value}`, {
         params: {
             limit: 10,
         }
@@ -68,7 +68,7 @@ try {
 function loadMore () {
     loadingMore.value = true;
     const lastArticleFreeze = lastArticleElement.value;
-    axios.get(`/articles/by-tag-name?tagName=${tagName.value}`, {
+    axios.get(`/articles/getArticlesByTagName?tagName=${tagName.value}`, {
         params: {
             limit: 10,
             offset: articles.value.length

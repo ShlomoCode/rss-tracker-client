@@ -1,4 +1,11 @@
 <template>
+    <div class="ma-1 mt-2" :class="smAndDown ? 'text-h6' : 'text-h5'">
+        <router-link :to="{ name: 'TagsPage' }" class="text-decoration-none" style="color: #4674ea;">
+            תגיות
+        </router-link>
+        /
+        {{ tagName }}
+    </div>
     <div :key="tagName">
         <Suspense>
             <template #default>
@@ -18,7 +25,9 @@
 import { toRefs } from 'vue';
 import TheTag from '@/components/Articles/TheTag.vue';
 import ArticleBannerPlaceholder from '@/components/Placeholders/ArticleBanner.vue';
+import { useDisplay } from 'vuetify'
 
+const { smAndDown } = useDisplay();
 const $props = defineProps({
     tagName: {
         type: String,

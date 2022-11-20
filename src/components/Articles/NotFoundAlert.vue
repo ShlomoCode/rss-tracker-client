@@ -4,11 +4,18 @@
             <v-card-title class="text-h5">
                 <slot />
             </v-card-title>
-            <v-card-text>
+            <v-card-text v-if="props.showTip">
                 יכול להיות שהמאמר ישן ונמחק אוטומטית, או שהיתה טעות בקישור.
             </v-card-text>
         </v-card>
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+    showTip: {
+        type: Boolean,
+        default: true
+    }
+})
+</script>

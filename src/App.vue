@@ -5,7 +5,7 @@
       <router-view v-slot="{ Component, route }">
         <v-slide-x-transition mode="out-in">
           <div>
-            <div class="ma-1" :class="smAndDown ? 'text-h6' : 'text-h5'">
+            <div v-if="!route.meta.dynamicViewName" class="ma-1" :class="smAndDown ? 'text-h6' : 'text-h5'">
               {{ route.meta.viewName }}
             </div>
             <component :is="Component" />
