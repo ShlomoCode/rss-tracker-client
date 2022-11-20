@@ -13,7 +13,7 @@ export const useFeedsStore = defineStore('feeds', () => {
                 subscribersCount: feed.subscribers,
                 title: feed.title,
                 url: feed.url,
-                subscribed: feed.subscriberSelf
+                subscribed: feed.isSubscribe
             });
         })
     }
@@ -43,7 +43,7 @@ export const useFeedsStore = defineStore('feeds', () => {
                 subscribersCount: feed.subscribers,
                 title: feed.title,
                 url: feed.url,
-                subscribed: feed.subscriberSelf
+                subscribed: feed.isSubscribe
             }));
         })
     }

@@ -4,20 +4,17 @@
             <ErrorFetchAlert :error="error" />
         </template>
         <template v-else-if="articles.length">
-            <v-divider></v-divider>
-            <h2 class="text-center">
-                נמצאו {{ articles.length }} כתבות תחת התגית "{{ tagName }}"
-            </h2>
-            <v-divider></v-divider>
-            <template v-for="article in articles" :key="article.id">
+            <template v-for="(article, index) in articles" :key="article.id">
                 <v-row>
                     <v-spacer></v-spacer>
                     <v-col cols="12" md="6">
-                        <ArticleBanner :article="article" />
+                        <ArticleBanner :article="article"
+                            :ref="index + 1 === articles.length ? lastArticleElement : null" />
                     </v-col>
                     <v-spacer></v-spacer>
                 </v-row>
             </template>
+            <LoadingMoreCard v-if="loadingMore" />
         </template>
         <template v-else>
             <NotFoundAlert>
@@ -32,6 +29,7 @@ import { toRefs, ref } from 'vue';
 import ArticleBanner from '@/components/Articles/ArticleBanner.vue';
 import NotFoundAlert from '@/components/Articles/NotFoundAlert.vue';
 import ErrorFetchAlert from '@/components/Articles/ErrorFetchAlert.vue';
+import LoadingMoreCard from '@/components/Articles/LoadingMoreCard.vue';
 import axios from '@/services/axios';
 import { useSnacksStore } from '@/stores/snacks';
 
@@ -47,9 +45,17 @@ const $props = defineProps({
 const { tagName } = toRefs($props);
 const articles = ref([]);
 const error = ref('');
+const loadingMore = ref(false);
+const totalArticles = ref(0);
+const lastArticleElement = ref(null);
 
 try {
-    const { data } = await axios.get(`/articles/by-tag-name?tagName=${tagName.value}`);
+    const { data } = await axios.get(`/articles/by-tag-name?tagName=${tagName.value}`, {
+        params: {
+            limit: 10,
+        }
+    });
+    totalArticles.value = data.totalArticles;
     articles.value = data.articles;
 } catch (err) {
     error.value = err.message;
@@ -58,4 +64,34 @@ try {
         color: 'error'
     })
 }
+
+function loadMore () {
+    loadingMore.value = true;
+    const lastArticleFreeze = lastArticleElement.value;
+    axios.get(`/articles/by-tag-name?tagName=${tagName.value}`, {
+        params: {
+            limit: 10,
+            offset: articles.value.length
+        }
+    }).then(({ data }) => {
+        articles.value = articles.value.concat(data.articles);
+        lastArticleFreeze?.scrollIntoView({ behavior: 'smooth' });
+    }).catch((err) => {
+        snacksStore.addSnack({
+            text: err.message,
+            color: 'error'
+        })
+    }).finally(() => {
+        loadingMore.value = false;
+    })
+}
+
+window.addEventListener('scroll', () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if ((scrollTop + clientHeight) >= scrollHeight) {
+        if (!loadingMore.value && articles.value.length < totalArticles.value) {
+            loadMore();
+        }
+    }
+});
 </script>
