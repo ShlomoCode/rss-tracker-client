@@ -31,12 +31,12 @@
                 <v-icon> mdi-account</v-icon>
                 {{ article.author }}
                 |
-                <v-icon>
-                    mdi-newspaper-variant-outline
-                </v-icon>
-                <a color="success" :href="article.url" target="_blank" rel="noopener noreferrer"
-                    class="text-decoration-none text-black">
-                    מקור
+                <a :href="article.url" target="_blank" rel="noopener noreferrer"
+                    class="text-decoration-none text-black text-body-1 mr-1">
+                    <v-icon class="rotate-270">
+                        mdi-open-in-new
+                    </v-icon>
+                    {{ articleHost }}
                 </a>
             </v-card>
             <v-divider></v-divider>
@@ -88,6 +88,11 @@ const contentHeight = computed(() => articleContentElement.value?.clientHeight);
 watch(contentHeight, (height) => {
     $emit('content-height', height)
 });
+
+const articleHost = computed(() => {
+    const url = new URL(article.value.url)
+    return url.hostname
+})
 </script>
 
 <style>

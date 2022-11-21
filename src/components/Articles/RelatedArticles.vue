@@ -1,16 +1,16 @@
 <template>
-    <v-card :class="{ 'ml-6': !smAndDown, 'mb-1': true }" elevation="0">
+    <v-card :class="[smAndDown ? '' : 'ml-6', 'mb-1']" elevation="0">
         <v-card-title>
             <h3>
                 <v-icon>
-                    mdi-rss
+                    mdi-newspaper-variant-multiple-outline
                 </v-icon>
                 מאמרים דומים
             </h3>
         </v-card-title>
         <v-divider v-if="smAndDown" class="mx9" />
     </v-card>
-    <v-card v-if="articlesRelated.length" :class="{ 'ml-6': !smAndDown, 'mb-0': true }">
+    <v-card v-if="articlesRelated.length" :class="[smAndDown? '' : 'ml-6', 'mb-0']">
         <v-card-text>
             <v-row>
                 <template v-for="(article, index) in articlesRelatedToDisplay" :key="article.id">

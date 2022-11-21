@@ -11,7 +11,7 @@
     <template v-if="isLoggedIn && isVerified">
       <v-btn :to="{ name: 'UnreadPage' }">
         <v-icon>
-          mdi-newspaper
+          mdi-inbox-full
         </v-icon>
         {{ xs ? '' : 'לא נקראו' }}
       </v-btn>

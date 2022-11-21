@@ -4,7 +4,7 @@
             <v-card-title>
                 <h3>
                     <v-icon>
-                        mdi-rss
+                        mdi-newspaper-variant-multiple-outline
                     </v-icon>
                     מאמרים דומים
                 </h3>
