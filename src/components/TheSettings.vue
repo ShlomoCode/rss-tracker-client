@@ -1,8 +1,13 @@
 <template>
-    <ConfirmLeavePageDialog @cancel="() => { showConfirmLeaveDialog = false; leaveTo = null }"
-        @ok="() => { showConfirmLeaveDialog = false; skipConfirmLeavePageDialog = true }"
-        v-model="showConfirmLeaveDialog" :leaveTo="leaveTo" />
-    <SettingsForm v-bind="{ initialSettings, loadingSaveSettings, hasChanges }" @changeSettings="settings = $event" @save="saveSettings" />
+    <template v-if="error">
+        <ErrorPage :error="error" />
+    </template>
+    <template v-else>
+        <ConfirmLeavePageDialog @cancel="() => { showConfirmLeaveDialog = false; leaveTo = null }"
+            @ok="() => { showConfirmLeaveDialog = false; skipConfirmLeavePageDialog = true }"
+            v-model="showConfirmLeaveDialog" :leaveTo="leaveTo" />
+        <SettingsForm v-bind="{ initialSettings, loadingSaveSettings, hasChanges }" @changeSettings="settings = $event" @save="saveSettings" />
+    </template>
 </template>
 
 <script setup>
@@ -10,6 +15,7 @@ import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import ConfirmLeavePageDialog from './ConfirmLeavePageDialog.vue'
 import SettingsForm from './SettingsForm.vue'
+import ErrorPage from '@/components/Articles/ErrorFetchAlert.vue';
 import { onBeforeRouteLeave } from 'vue-router'
 import axios from '@/services/axios'
 import { useSnacksStore } from '@/stores/snacks'
@@ -17,10 +23,15 @@ import { useUserStore } from '@/stores/user'
 
 const snacksStore = useSnacksStore();
 const userStore = useUserStore();
+const error = ref('');
 const initialSettings = ref({});
-await axios.get('/users/settings').then(({ data }) => {
-    initialSettings.value = data;
-})
+try {
+    await axios.get('/users/settings').then(({ data }) => {
+        initialSettings.value = data;
+    })
+} catch(err){
+    error.value = err.message;
+}
 
 const { isLoggedIn } = storeToRefs(userStore);
 const settings = ref({ ...initialSettings.value });
