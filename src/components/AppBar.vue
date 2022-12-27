@@ -16,11 +16,15 @@
         <v-icon>
           mdi-inbox-full
         </v-icon>
-        {{ xs ? '' : 'לא נקראו' }}
+        <template v-if="!xs">
+          לא נקראו
+        </template>
       </v-btn>
       <v-btn :to="{ name: 'SubscriptionsPage' }">
         <v-icon>mdi-rss</v-icon>
-        מנויים
+        <template v-if="!xs">
+          מנויים
+        </template>
       </v-btn>
     </template>
     <template v-if="!isLoggedIn">

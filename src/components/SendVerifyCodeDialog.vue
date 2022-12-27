@@ -25,7 +25,7 @@
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="green" variant="text" :disabled="loading" @click="open = false">
-                    הממ... אבדוק שוב ואעדכן :)
+                    מממ... אבדוק שוב ואעדכן :)
                 </v-btn>
             </v-card-actions>
         </v-card>

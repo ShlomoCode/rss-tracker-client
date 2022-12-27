@@ -1,5 +1,5 @@
 <template>
-    <v-card width="400" class="mx-auto mt-3 mb-3">
+    <v-card :width="width < 400 ? 350 : 400" class="mx-auto mt-1 mb-3">
         <v-card-title>
             <h2 class="text-h4">התחברות</h2>
         </v-card-title>
@@ -50,7 +50,9 @@ import { ref, computed } from "vue";
 import { useUserStore } from '@/stores/user';
 import { useRouter } from 'vue-router';
 import { useSnacksStore } from '@/stores/snacks'
+import { useDisplay } from 'vuetify';
 
+const { width } = useDisplay();
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
 const $router = useRouter()

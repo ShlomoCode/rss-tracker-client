@@ -1,5 +1,5 @@
 <template>
-    <v-card width="400" class="mx-auto mt-3 mb-3">
+    <v-card :width="width < 400 ? 350 : 400" class="mx-auto mt-3 mb-3">
         <v-card-title>
             <h2 class="text-h4">אימות דוא"ל</h2>
         </v-card-title>
@@ -40,8 +40,10 @@ import validator from 'validator'
 import { useUserStore } from '@/stores/user';
 import { useSnacksStore } from '@/stores/snacks'
 import { useRouter } from 'vue-router';
+import { useDisplay } from 'vuetify';
 import sendVerifyCodeDialog from './SendVerifyCodeDialog.vue'
 
+const { width } = useDisplay();
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
 const $router = useRouter()
