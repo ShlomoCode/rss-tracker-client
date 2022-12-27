@@ -72,10 +72,17 @@ const register = async () => {
         })
         emit('toggle-form-show');
     } catch (err) {
-        snacksStore.addSnack({
-            text: err.message,
-            color: 'error'
-        })
+        if (err.response && err.response.status === 409) {
+            snacksStore.addSnack({
+                text: 'המייל תפוס. אם החשבון הזה שלך, עבור להתחברות',
+                color: 'error'
+            });
+        } else {
+            snacksStore.addSnack({
+                text: err.message,
+                color: 'error'
+            })
+        }
     }
     finally {
         loading.value = false;
