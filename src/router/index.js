@@ -10,6 +10,7 @@ import TagView from '@/views/TagPage.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordPage.vue'
 import UnreadView from '@/views/UnreadPage.vue'
 import TagsView from '@/views/TagsPage.vue'
+import SettingsView from '@/views/SettingsPage.vue'
 
 import { useUserStore } from '@/stores/user'
 import { useSnacksStore } from '@/stores/snacks'
@@ -69,6 +70,16 @@ const router = createRouter({
         code: route.query.code,
         nextRoute: route.query.next
       }),
+    },
+    {
+      path: '/settings',
+      name: 'SettingsPage',
+      component: SettingsView,
+      meta: {
+        viewName: 'הגדרות',
+        requiresLogin: true,
+        requiresVerification: true,
+      },
     },
     {
       path: '/subscriptions',

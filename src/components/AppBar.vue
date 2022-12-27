@@ -9,6 +9,9 @@
     <v-spacer></v-spacer>
     <v-btn v-if="isLoggedIn && !isVerified" :to="{ name: 'VerifyPage' }">אימות דוא"ל</v-btn>
     <template v-if="isLoggedIn && isVerified">
+      <v-btn :to="{ name: 'SettingsPage' }">
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
       <v-btn :to="{ name: 'UnreadPage' }">
         <v-icon>
           mdi-inbox-full
