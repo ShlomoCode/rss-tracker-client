@@ -7,18 +7,22 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import ConfirmLeavePageDialog from './ConfirmLeavePageDialog.vue'
 import SettingsForm from './SettingsForm.vue'
 import { onBeforeRouteLeave } from 'vue-router'
 import axios from '@/services/axios'
 import { useSnacksStore } from '@/stores/snacks'
+import { useUserStore } from '@/stores/user'
 
-const snacksStore = useSnacksStore()
+const snacksStore = useSnacksStore();
+const userStore = useUserStore();
 const initialSettings = ref({});
 await axios.get('/users/settings').then(({ data }) => {
     initialSettings.value = data;
 })
 
+const { isLoggedIn } = storeToRefs(userStore);
 const settings = ref({ ...initialSettings.value });
 const showConfirmLeaveDialog = ref(false);
 const leaveTo = ref(null);
@@ -30,7 +34,7 @@ const hasChanges = computed(() => {
 })
 
 onBeforeRouteLeave(to => {
-    if (!hasChanges.value || skipConfirmLeavePageDialog.value) {
+    if (!isLoggedIn.value || !hasChanges.value || skipConfirmLeavePageDialog.value) {
         return true
     }
     showConfirmLeaveDialog.value = true
