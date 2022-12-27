@@ -55,6 +55,6 @@ try {
 
 const filteredTags = computed(() => {
     if (!search.value) return tags.value;
-    return tags.value.filter(tag => tag.includes(search.value));
+    return tags.value.filter(tag => tag.name.includes(search.value));
 });
 </script>
