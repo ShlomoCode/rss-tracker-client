@@ -62,34 +62,41 @@ try {
     snacksStore.addSnack({
         text: err.message,
         color: 'error'
-    })
+    });
 }
 
-function loadMore () {
+const blockLoadMore = ref(false);
+async function loadMore () {
     loadingMore.value = true;
     const lastArticleFreeze = lastArticleElement.value;
-    axios.get(`/articles/getArticlesByTagName?tagName=${tagName.value}`, {
+    try {
+        const { data } = await axios.get(`/articles/getArticlesByTagName?tagName=${tagName.value}`, {
         params: {
             limit: 10,
             offset: articles.value.length
         }
-    }).then(({ data }) => {
+        });
         articles.value = articles.value.concat(data.articles);
         lastArticleFreeze?.scrollIntoView({ behavior: 'smooth' });
-    }).catch((err) => {
+    } catch (err) {
         snacksStore.addSnack({
             text: err.message,
             color: 'error'
         })
-    }).finally(() => {
+        blockLoadMore.value = true;
+        setTimeout(() => {
+            blockLoadMore.value = false;
+        }, 700)
+    } finally {
         loadingMore.value = false;
-    })
+    }
 }
 
 window.addEventListener('scroll', () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
     if ((scrollTop + clientHeight) >= scrollHeight) {
         if (!loadingMore.value && articles.value.length < totalArticles.value) {
+            if (blockLoadMore.value || loadingMore.value) return;
             loadMore();
         }
     }
