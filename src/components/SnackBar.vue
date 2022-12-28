@@ -1,6 +1,6 @@
 <template>
     <template v-for="snack in snacksStore.snacks" :key="snack.id">
-        <v-snackbar v-model="snack.show" v-bind="snack" position="absolute">
+        <v-snackbar v-model="snack.show" v-bind="snack" position="fixed">
             <div :style="snack.ltr ? 'direction: ltr !important;' : ''">
                 {{ snack.text }}
             </div>
