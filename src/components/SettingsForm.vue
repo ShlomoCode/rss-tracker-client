@@ -4,7 +4,7 @@
             <v-card-title class="text-h5">
                 העדפות התראות
             </v-card-title>
-            <v-switch v-model="settings.enableEmailNotifications" label="קבלת מאמרים ממקורות במעקב ישירות למייל" class="mx-5" color="green" />
+            <v-switch v-model="settings.enableEmailNotifications" label="קבלת מאמרים מפידים במעקב ישירות למייל" class="mx-5" color="green" />
             <v-switch v-model="settings.allowAttachmentsInEmail" label="אפשר שליחת תמונת מאמר כקובץ מצורף" class="mx-5" color="green" />
             <v-divider></v-divider>
             <v-card-actions>

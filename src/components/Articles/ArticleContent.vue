@@ -15,7 +15,7 @@
             </v-card-text>
             <v-divider class="mb-2" />
             <v-card width="82%" class="mx-auto">
-                <v-img :src="article.image" :alt="article.title" width="100%" />
+                <v-img :src="article.image" :alt="article.title" width="100%" @click="openImageInModal(article.image)" />
             </v-card>
             <v-card width="80%" class="mx-auto mt-1" variant="text">
                 <p class="text-subtitle-2 text-center article-description">
@@ -62,10 +62,13 @@
 <script setup>
 import { toRefs, computed, watch, ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import { useRouter } from 'vue-router'
+import swal from 'sweetalert'
 import TimeAgo from 'javascript-time-ago'
 import he from 'javascript-time-ago/locale/he'
 TimeAgo.addLocale(he)
 const timeAgo = new TimeAgo('he-IL')
+const router = useRouter();
 
 const { smAndDown } = useDisplay()
 
@@ -92,6 +95,34 @@ watch(contentHeight, (height) => {
 const articleHost = computed(() => {
     const url = new URL(article.value.url)
     return url.hostname
+});
+
+function openImageInModal (imageUrl) {
+    swal({
+        content: {
+            element: 'img',
+            attributes: {
+                src: imageUrl,
+                style: 'width: 100%; height: 100%; object-fit: contain;'
+            },
+        },
+        buttons: false,
+        escKey: true
+    })
+}
+
+watch(articleContentElement, (element) => {
+    if (!element) return;
+    element.querySelectorAll('img').forEach((img) => {
+        img.addEventListener('click', () => {
+            openImageInModal(img.src);
+        });
+    })
+})
+
+router.afterEach(to => {
+    swal.close();
+    return true;
 })
 </script>
 
@@ -99,5 +130,18 @@ const articleHost = computed(() => {
 .article-content img {
     width: 50% !important;
     height: 50% !important;
+}
+
+.swal-modal{
+    min-width: 60% !important;
+}
+
+.swal-content {
+    padding: 6px !important;
+    margin-top: 0px !important
+}
+
+.swal-content:last-child {
+   margin-bottom: -5.5px !important
 }
 </style>
