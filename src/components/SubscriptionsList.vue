@@ -10,7 +10,7 @@
                 <v-spacer></v-spacer>
                 <v-col cols="10" justify="center">
                     <v-card>
-                        <v-card-title class="text-h5">אין פידים מתאימים להצגה</v-card-title>
+                        <v-card-title :class="xs ? 'text-h6 text-center' : 'text-h5'">אין פידים מתאימים להצגה</v-card-title>
                         <v-card-text>
                             ניתן להוסיף פידים חדשים באמצעות לחיצה על הכפתור "הוסף מקור חדש" בצד שמאל
                         </v-card-text>
@@ -25,9 +25,11 @@
 <script setup>
 import { useFeedsStore } from '@/stores/feeds'
 import { computed, toRefs } from 'vue'
+import { useDisplay } from 'vuetify'
 import FeedCard from '@/components/FeedCard.vue'
 
 const feedStore = useFeedsStore()
+const { xs } = useDisplay()
 
 const $props = defineProps({
     search: {

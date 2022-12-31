@@ -1,6 +1,6 @@
 <template>
     <template v-for="snack in snacksStore.snacks" :key="snack.id">
-        <v-snackbar v-model="snack.show" v-bind="snack" position="fixed">
+        <v-snackbar v-model="snack.show" v-bind="snack"  :location="xs ? 'top' : 'bottom'" :position="xsAndDown ? 'absolute' : 'fixed'">
             <div :style="snack.ltr ? 'direction: ltr !important;' : ''">
                 {{ snack.text }}
             </div>
@@ -15,5 +15,8 @@
 
 <script setup>
 import { useSnacksStore } from '@/stores/snacks';
+import { useDisplay } from 'vuetify';
+
+const { xs } = useDisplay();
 const snacksStore = useSnacksStore();
 </script>
