@@ -55,7 +55,7 @@ import { useDisplay } from 'vuetify';
 const { width } = useDisplay();
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
-const $router = useRouter()
+const router = useRouter()
 
 const email = ref('');
 const password = ref('');
@@ -67,7 +67,7 @@ const toggleFormShow = () => {
     emit('toggle-form-show');
 }
 
-const $props = defineProps({
+const props = defineProps({
     nextRoute: {
         type: String,
         required: true
@@ -90,16 +90,16 @@ const login = async () => {
                 text: 'התחברת בהצלחה. ברוך הבא :)',
                 color: 'success'
             });
-            $router.push($props.nextRoute);
+            router.push(props.nextRoute);
         } else {
             snacksStore.addSnack({
                 text: 'התחברת בהצלחה, נשאר רק לאמת דוא"ל והכל מוכן',
                 color: 'info'
             });
-            if ($props.nextRoute === '/') {
-                $router.push({ name: 'VerifyPage' });
+            if (props.nextRoute === '/') {
+                router.push({ name: 'VerifyPage' });
             } else {
-                $router.push('/verify?' + $props.nextRoute);
+                router.push('/verify?' + props.nextRoute);
             }
         }
     } catch (error) {
@@ -147,7 +147,7 @@ const forgotPassword = async () => {
             text: 'אוקיי, שלחנו לך למייל קוד אימות לאיפוס הסיסמה',
             color: 'success'
         });
-        $router.push({
+        router.push({
             name: 'ForgotPasswordPage',
             query: {
                 email: email.value

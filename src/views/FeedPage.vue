@@ -20,7 +20,7 @@ import { toRefs } from 'vue';
 import TheFeed from '@/components/Articles/TheFeed.vue';
 import ArticleBannerPlaceholder from '@/components/Placeholders/ArticleBanner.vue';
 
-const $props = defineProps({
+const props = defineProps({
     feedId: {
         type: String,
         required: true,
@@ -28,5 +28,5 @@ const $props = defineProps({
     }
 })
 
-const { feedId } = toRefs($props);
+const { feedId } = toRefs(props);
 </script>

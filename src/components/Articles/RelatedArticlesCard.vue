@@ -47,7 +47,7 @@ import he from 'javascript-time-ago/locale/he'
 TimeAgo.addLocale(he)
 
 const { md, mdAndDown } = useDisplay()
-const $props = defineProps({
+const props = defineProps({
     article: {
         type: Object,
         required: true
@@ -59,7 +59,7 @@ const $props = defineProps({
 })
 
 const timeAgo = new TimeAgo('he-IL')
-const { article, last } = toRefs($props)
+const { article, last } = toRefs(props)
 
 const publishDataAgo = computed(() => {
     const date = new Date(article.value.published)

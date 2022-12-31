@@ -72,24 +72,24 @@ const router = useRouter();
 
 const { smAndDown } = useDisplay()
 
-const $props = defineProps({
+const props = defineProps({
     article: {
         type: Object,
         required: true,
     }
 })
-const { article } = toRefs($props)
+const { article } = toRefs(props)
 
 const publishDataAgo = computed(() => {
     const date = new Date(article.value.published)
     return timeAgo.format(date)
 })
 
-const $emit = defineEmits(['content-height'])
+const emit = defineEmits(['content-height'])
 const articleContentElement = ref(null)
 const contentHeight = computed(() => articleContentElement.value?.clientHeight);
 watch(contentHeight, (height) => {
-    $emit('content-height', height)
+    emit('content-height', height)
 });
 
 const articleHost = computed(() => {

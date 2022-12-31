@@ -1,7 +1,7 @@
 <template>
   <v-app-bar color="primary" density="compact">
     <template v-slot:prepend></template>
-    <v-toolbar-title outlined @click="$router.push({ name: 'HomePage' })">
+    <v-toolbar-title outlined @click="router.push({ name: 'HomePage' })">
       <router-link :to="{ name: 'HomePage' }" style="color: white; text-decoration: none">
         Rss Tracker
       </router-link>
@@ -48,7 +48,7 @@ import LogOutBtn from '@/components/LogOutBtn.vue';
 import { useDisplay } from 'vuetify';
 
 const { xs } = useDisplay();
-const $router = useRouter()
+const router = useRouter()
 const userStore = useUserStore();
 
 const { isLoggedIn, isVerified } = storeToRefs(userStore);

@@ -40,14 +40,14 @@ import { useSnacksStore } from '@/stores/snacks'
 const feedsStore = useFeedsStore()
 const snacksStore = useSnacksStore()
 
-const $props = defineProps({
+const props = defineProps({
     feed: {
         type: Object,
         required: true
     }
 })
 
-const { feed } = toRefs($props)
+const { feed } = toRefs(props)
 const loadingChangeSubscription = ref(false)
 
 const shortFeedTitle = computed(() => {

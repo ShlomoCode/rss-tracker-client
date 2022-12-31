@@ -56,9 +56,9 @@ import { useDisplay } from 'vuetify';
 const { width } = useDisplay();
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
-const $router = useRouter()
+const router = useRouter()
 
-const $props = defineProps({
+const props = defineProps({
     token: {
         type: String,
         default: '',
@@ -71,8 +71,8 @@ const $props = defineProps({
 
 const { isLoggedIn } = storeToRefs(userStore);
 const showPassword = ref(false);
-const email = ref($props.email);
-const token = ref($props.token);
+const email = ref(props.email);
+const token = ref(props.token);
 const password = ref('');
 const validateForm = ref(false);
 if (isLoggedIn.value) {
@@ -128,9 +128,9 @@ const changePassword = async () => {
             color: 'success'
         });
         if (isLoggedIn.value) {
-            $router.push({ name: 'HomePage' });
+            router.push({ name: 'HomePage' });
         } else {
-            $router.push({ name: 'LoginPage' });
+            router.push({ name: 'LoginPage' });
         }
     } catch (error) {
         snacksStore.addSnack({

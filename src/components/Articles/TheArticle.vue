@@ -31,7 +31,7 @@ import NotFoundAlert from '@/components/Articles/NotFoundAlert.vue';
 import ErrorPage from '@/components/Articles/ErrorFetchAlert.vue';
 
 const snacksStore = useSnacksStore();
-const $props = defineProps({
+const props = defineProps({
     articleId: {
         type: String,
         required: true,
@@ -39,7 +39,7 @@ const $props = defineProps({
     }
 })
 
-const { articleId } = toRefs($props)
+const { articleId } = toRefs(props)
 const article = ref({})
 const isNotFound = ref(false)
 const error = ref('')

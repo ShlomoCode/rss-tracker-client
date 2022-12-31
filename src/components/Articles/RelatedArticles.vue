@@ -34,7 +34,7 @@ import { useDisplay } from 'vuetify'
 const { smAndDown } = useDisplay()
 const snacksStore = useSnacksStore();
 
-const $props = defineProps({
+const props = defineProps({
     articleId: {
         type: String,
         required: true,
@@ -45,7 +45,7 @@ const $props = defineProps({
         required: true,
     }
 })
-const { articleId, articleContentHeight } = toRefs($props);
+const { articleId, articleContentHeight } = toRefs(props);
 const articlesRelated = ref([]);
 
 try {

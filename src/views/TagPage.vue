@@ -28,13 +28,13 @@ import ArticleBannerPlaceholder from '@/components/Placeholders/ArticleBanner.vu
 import { useDisplay } from 'vuetify'
 
 const { smAndDown } = useDisplay();
-const $props = defineProps({
+const props = defineProps({
     tagName: {
         type: String,
         required: true,
     }
 })
 
-const { tagName } = toRefs($props);
+const { tagName } = toRefs(props);
 document.title = `Rss Tracker - ${tagName.value}`;
 </script>

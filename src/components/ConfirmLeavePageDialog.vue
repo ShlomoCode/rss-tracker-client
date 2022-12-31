@@ -24,7 +24,7 @@
 import { toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 
-const $router = useRouter()
+const router = useRouter()
 const props = defineProps({
     leaveTo: {
         type: [null, Object]
@@ -34,7 +34,7 @@ const { leaveTo } = toRefs(props)
 const emit = defineEmits(['ok', 'cancel'])
 
 function leavePage () {
-    $router.push(leaveTo.value)
+    router.push(leaveTo.value)
     emit('ok')
 }
 </script>

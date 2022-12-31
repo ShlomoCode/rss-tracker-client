@@ -33,7 +33,7 @@
                         <v-expand-transition mode="out-in">
                             <v-chip size="small" class="ma-1" color="blue-darken-1"
                                 :to="{ name: 'TagPage', params: { tagName } }"
-                                @click.prevent="$router.push({ name: 'TagPage', params: { tagName } })">
+                                @click.prevent="router.push({ name: 'TagPage', params: { tagName } })">
                                 <v-icon class="rotate-180 ml-1">
                                     mdi-label-outline
                                 </v-icon>
@@ -66,14 +66,14 @@ import { useDisplay } from 'vuetify'
 const { sm, xs, lg, smAndDown } = useDisplay()
 TimeAgo.addLocale(he)
 const timeAgo = new TimeAgo('he-IL')
-const $props = defineProps({
+const props = defineProps({
     article: {
         type: Object,
         required: true,
     }
 })
 
-const { article } = toRefs($props)
+const { article } = toRefs(props)
 
 const shortArticleTitle = computed(() => {
     const limitChars = 80

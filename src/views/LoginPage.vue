@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-slide-x-transition mode="out-in">
-      <component :is="activeFormComponent" @toggle-form-show="toggleFormShow()" :nextRoute="$props.nextRoute" />
+      <component :is="activeFormComponent" @toggle-form-show="toggleFormShow()" :nextRoute="props.nextRoute" />
     </v-slide-x-transition>
     <Suspense>
       <template #default>
@@ -21,7 +21,7 @@ import StatisticsCard from '@/components/StatisticsCard.vue';
 import StatisticsCardPlaceholder from '@/components/Placeholders/StatisticsCard.vue';
 import { ref, computed } from 'vue';
 
-const $props = defineProps({
+const props = defineProps({
   nextRoute: {
     type: String,
     default: '/'
@@ -32,7 +32,7 @@ const $props = defineProps({
   }
 })
 
-const activeForm = ref($props.register ? 'RegisterForm' : 'LoginForm');
+const activeForm = ref(props.register ? 'RegisterForm' : 'LoginForm');
 
 const toggleFormShow = () => {
   activeForm.value = activeForm.value === 'LoginForm' ? 'RegisterForm' : 'LoginForm';

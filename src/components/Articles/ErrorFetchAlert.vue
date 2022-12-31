@@ -23,6 +23,11 @@
 <script setup>
 import { toRefs } from 'vue'
 
-const $props = defineProps(['error'])
-const { error } = toRefs($props)
+const props = defineProps({
+    error: {
+        type: String,
+        required: true
+    }
+})
+const { error } = toRefs(props)
 </script>

@@ -16,7 +16,7 @@
                 <template v-for="tag in filteredTags" :key="tag.name">
                     <v-chip class="ma-1 mb-3 ml-2" color="blue-darken-1"
                         :to="{ name: 'TagPage', params: { tagName: tag.name } }"
-                        @click.prevent="$router.push({ name: 'TagPage', params: { tagName: tag.name } })">
+                        @click.prevent="router.push({ name: 'TagPage', params: { tagName: tag.name } })">
                         <v-icon class="rotate-180 ml-1">
                             mdi-label-outline
                         </v-icon>

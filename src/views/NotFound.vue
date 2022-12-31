@@ -8,7 +8,7 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" variant="text" location="left" @click="$router.push({ name: 'HomePage' })">
+            <v-btn color="primary" variant="text" location="left" @click="router.push({ name: 'HomePage' })">
                 <v-icon>
                     mdi-home
                 </v-icon>

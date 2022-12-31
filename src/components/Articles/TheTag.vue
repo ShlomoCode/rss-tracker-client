@@ -35,14 +35,14 @@ import axios from '@/services/axios';
 
 const snacksStore = useSnacksStore();
 
-const $props = defineProps({
+const props = defineProps({
     tagName: {
         type: String,
         required: true,
     }
 })
 
-const { tagName } = toRefs($props);
+const { tagName } = toRefs(props);
 const articles = ref([]);
 const error = ref('');
 const loadingMore = ref(false);

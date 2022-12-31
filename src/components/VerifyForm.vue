@@ -46,9 +46,9 @@ import sendVerifyCodeDialog from './SendVerifyCodeDialog.vue'
 const { width } = useDisplay();
 const userStore = useUserStore();
 const snacksStore = useSnacksStore();
-const $router = useRouter()
+const router = useRouter()
 
-const $props = defineProps({
+const props = defineProps({
     nextRoute: {
         type: String,
         default: '/'
@@ -59,7 +59,7 @@ const $props = defineProps({
     }
 })
 
-const code = ref($props.code);
+const code = ref(props.code);
 const loading = ref(false);
 
 const validateCode = ref(false);
@@ -84,7 +84,7 @@ const verify = async () => {
             text: 'החשבון אומת בהצלחה!',
             color: 'success'
         })
-        $router.push($props.nextRoute);
+        router.push(props.nextRoute);
     } catch (error) {
         if (error.response && error.response.status === 409) {
             snacksStore.addSnack({

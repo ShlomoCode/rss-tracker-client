@@ -14,7 +14,7 @@ import { useSnacksStore } from '@/stores/snacks.js';
 import { useRouter } from 'vue-router';
 
 const snacksStore = useSnacksStore();
-const $router = useRouter()
+const router = useRouter()
 const userStore = useUserStore();
 
 const loading = ref(false);
@@ -28,7 +28,7 @@ const logout = async () => {
             text: "התנתקת בהצלחה. נתראה! 👋",
             color: "success",
         });
-        $router.push({ name: 'HomePage' })
+        router.push({ name: 'HomePage' })
         loading.value = false;
     }
 };

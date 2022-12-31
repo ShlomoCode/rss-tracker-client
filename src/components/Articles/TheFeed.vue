@@ -34,7 +34,7 @@ import LoadingMoreCard from '@/components/Articles/LoadingMoreCard.vue';
 import { useSnacksStore } from '@/stores/snacks';
 import axios from '@/services/axios';
 
-const $props = defineProps({
+const props = defineProps({
     feedId: {
         type: String,
         required: true,
@@ -44,7 +44,7 @@ const $props = defineProps({
 
 const snacksStore = useSnacksStore();
 
-const { feedId } = toRefs($props);
+const { feedId } = toRefs(props);
 
 const articles = ref([]);
 const feed = ref({});

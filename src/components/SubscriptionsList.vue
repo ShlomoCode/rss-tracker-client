@@ -31,7 +31,7 @@ import FeedCard from '@/components/FeedCard.vue'
 const feedStore = useFeedsStore()
 const { xs } = useDisplay()
 
-const $props = defineProps({
+const props = defineProps({
     search: {
         type: String,
         default: ''
@@ -41,7 +41,7 @@ const $props = defineProps({
         required: true
     }
 })
-const { search, showOnlySubs } = toRefs($props)
+const { search, showOnlySubs } = toRefs(props)
 
 await feedStore.fetchFeeds()
 

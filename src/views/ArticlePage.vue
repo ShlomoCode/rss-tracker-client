@@ -24,12 +24,12 @@ import { toRefs } from 'vue';
 import SingleArticle from '@/components/Articles/TheArticle.vue'
 import SingleArticlePlaceholder from '@/components/Placeholders/TheArticle.vue';
 
-const $props = defineProps({
+const props = defineProps({
     articleId: {
         type: String,
         required: true,
         validator: (value) => validator.isMongoId(value),
     }
 });
-const { articleId } = toRefs($props);
+const { articleId } = toRefs(props);
 </script>
