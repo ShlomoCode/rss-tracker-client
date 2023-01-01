@@ -121,7 +121,9 @@ watch(articleContentElement, (element) => {
 })
 
 router.afterEach(to => {
-    swal.close();
+    if (swal.getState().isOpen) {
+        swal.close();
+    }
     return true;
 })
 </script>
