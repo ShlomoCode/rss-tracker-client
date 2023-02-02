@@ -62,7 +62,9 @@ import { toRefs, computed } from 'vue'
 import TimeAgo from 'javascript-time-ago'
 import he from 'javascript-time-ago/locale/he'
 import { useDisplay } from 'vuetify'
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const { sm, xs, lg, smAndDown } = useDisplay()
 TimeAgo.addLocale(he)
 const timeAgo = new TimeAgo('he-IL')

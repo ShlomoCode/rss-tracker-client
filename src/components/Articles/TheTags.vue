@@ -40,7 +40,9 @@ import { ref, computed } from 'vue';
 import ErrorFetchAlert from '@/components/Articles/ErrorFetchAlert.vue';
 import axios from '@/services/axios';
 import { useDisplay } from 'vuetify';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const { xsAndDown } = useDisplay();
 const error = ref('');
 const tags = ref([]);
